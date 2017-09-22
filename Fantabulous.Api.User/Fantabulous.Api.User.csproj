@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fantabulous.Api\Fantabulous.Api.csproj" />
+    <ProjectReference Include="..\Fantabulous.Redis\Fantabulous.Redis.csproj" />
+    <ProjectReference Include="..\Fantabulous.User\Fantabulous.User.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>

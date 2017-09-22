@@ -1,0 +1,90 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Api", "Fantabulous.Api\Fantabulous.Api.csproj", "{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.User", "Fantabulous.User\Fantabulous.User.csproj", "{591EC535-8DA2-468D-A31D-40DF16DE1139}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Api.User", "Fantabulous.Api.User\Fantabulous.Api.User.csproj", "{964F63CC-5FE6-4454-B46E-22D9EA6138B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Mysql", "Fantabulous.Mysql\Fantabulous.Mysql.csproj", "{5A759762-4F0B-4C9E-927D-EC328110FA55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Redis", "Fantabulous.Redis\Fantabulous.Redis.csproj", "{042A042E-02F9-40B6-8222-C3098D53E420}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Debug|x64.ActiveCfg = Debug|x64
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Debug|x64.Build.0 = Debug|x64
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Debug|x86.ActiveCfg = Debug|x86
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Debug|x86.Build.0 = Debug|x86
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Release|x64.ActiveCfg = Release|x64
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Release|x64.Build.0 = Release|x64
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Release|x86.ActiveCfg = Release|x86
+		{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}.Release|x86.Build.0 = Release|x86
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Debug|x64.ActiveCfg = Debug|x64
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Debug|x64.Build.0 = Debug|x64
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Debug|x86.ActiveCfg = Debug|x86
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Debug|x86.Build.0 = Debug|x86
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Release|x64.ActiveCfg = Release|x64
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Release|x64.Build.0 = Release|x64
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Release|x86.ActiveCfg = Release|x86
+		{591EC535-8DA2-468D-A31D-40DF16DE1139}.Release|x86.Build.0 = Release|x86
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Debug|x64.ActiveCfg = Debug|x64
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Debug|x64.Build.0 = Debug|x64
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Debug|x86.ActiveCfg = Debug|x86
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Debug|x86.Build.0 = Debug|x86
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Release|x64.ActiveCfg = Release|x64
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Release|x64.Build.0 = Release|x64
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Release|x86.ActiveCfg = Release|x86
+		{964F63CC-5FE6-4454-B46E-22D9EA6138B6}.Release|x86.Build.0 = Release|x86
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Debug|x64.ActiveCfg = Debug|x64
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Debug|x64.Build.0 = Debug|x64
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Debug|x86.ActiveCfg = Debug|x86
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Debug|x86.Build.0 = Debug|x86
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Release|x64.ActiveCfg = Release|x64
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Release|x64.Build.0 = Release|x64
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Release|x86.ActiveCfg = Release|x86
+		{5A759762-4F0B-4C9E-927D-EC328110FA55}.Release|x86.Build.0 = Release|x86
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Debug|x64.ActiveCfg = Debug|x64
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Debug|x64.Build.0 = Debug|x64
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Debug|x86.ActiveCfg = Debug|x86
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Debug|x86.Build.0 = Debug|x86
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Release|x64.ActiveCfg = Release|x64
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Release|x64.Build.0 = Release|x64
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Release|x86.ActiveCfg = Release|x86
+		{042A042E-02F9-40B6-8222-C3098D53E420}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+EndGlobal
