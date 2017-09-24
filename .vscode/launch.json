@@ -5,14 +5,14 @@
    "version": "0.2.0",
    "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": "Launch All API",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceRoot}/Fantabulous.Api.User/bin/Debug/netcoreapp2.0/Fantabulous.Api.User.dll",
+            "program": "${workspaceRoot}/Fantabulous.Api.All/bin/Debug/netcoreapp2.0/Fantabulous.Api.All.dll",
             "args": [],
-            "cwd": "${workspaceRoot}/Fantabulous.Api.User",
+            "cwd": "${workspaceRoot}/Fantabulous.Api.All",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "env": {

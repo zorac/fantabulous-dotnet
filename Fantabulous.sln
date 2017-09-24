@@ -5,13 +5,17 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Api", "Fantabulous.Api\Fantabulous.Api.csproj", "{3ED50BC9-B45D-4918-98E0-3ECDE5481CC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.User", "Fantabulous.User\Fantabulous.User.csproj", "{591EC535-8DA2-468D-A31D-40DF16DE1139}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Users", "Fantabulous.Users\Fantabulous.Users.csproj", "{591EC535-8DA2-468D-A31D-40DF16DE1139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Api.User", "Fantabulous.Api.User\Fantabulous.Api.User.csproj", "{964F63CC-5FE6-4454-B46E-22D9EA6138B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Api.Users", "Fantabulous.Api.Users\Fantabulous.Api.Users.csproj", "{964F63CC-5FE6-4454-B46E-22D9EA6138B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Mysql", "Fantabulous.Mysql\Fantabulous.Mysql.csproj", "{5A759762-4F0B-4C9E-927D-EC328110FA55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Redis", "Fantabulous.Redis\Fantabulous.Redis.csproj", "{042A042E-02F9-40B6-8222-C3098D53E420}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Api.All", "Fantabulous.Api.All\Fantabulous.Api.All.csproj", "{BC656284-D6FD-4F69-9AC7-14E13AD92249}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantabulous.Core", "Fantabulous.Core\Fantabulous.Core.csproj", "{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,5 +90,29 @@ Global
 		{042A042E-02F9-40B6-8222-C3098D53E420}.Release|x64.Build.0 = Release|x64
 		{042A042E-02F9-40B6-8222-C3098D53E420}.Release|x86.ActiveCfg = Release|x86
 		{042A042E-02F9-40B6-8222-C3098D53E420}.Release|x86.Build.0 = Release|x86
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Debug|x64.ActiveCfg = Debug|x64
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Debug|x64.Build.0 = Debug|x64
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Debug|x86.ActiveCfg = Debug|x86
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Debug|x86.Build.0 = Debug|x86
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Release|x64.ActiveCfg = Release|x64
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Release|x64.Build.0 = Release|x64
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Release|x86.ActiveCfg = Release|x86
+		{BC656284-D6FD-4F69-9AC7-14E13AD92249}.Release|x86.Build.0 = Release|x86
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Debug|x64.ActiveCfg = Debug|x64
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Debug|x64.Build.0 = Debug|x64
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Debug|x86.ActiveCfg = Debug|x86
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Debug|x86.Build.0 = Debug|x86
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Release|x64.ActiveCfg = Release|x64
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Release|x64.Build.0 = Release|x64
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Release|x86.ActiveCfg = Release|x86
+		{9641C108-EA3B-4E40-90EE-C5DFD22D1DE0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 EndGlobal

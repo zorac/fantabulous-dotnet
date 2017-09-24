@@ -1,6 +1,8 @@
-﻿using System;
+using System;
+using System.Threading.Tasks;
 
-using Fantabulous.User;
+using Fantabulous.Core.Models;
+using Fantabulous.Core.Services;
 
 namespace Microsoft.AspNetCore.Http
 {
@@ -9,20 +11,22 @@ namespace Microsoft.AspNetCore.Http
         private const string USER_ID = "user_id";
         private const string USER_NAME = "user_name";
 
-        public static void Login(this ISession session, IUser user)
+        public static void Login(this ISession session, User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            session.SetInt32(USER_ID, user.Id);
+            session.SetInt32(USER_ID, (int)user.Id);
             session.SetString(USER_NAME, user.Name);
         }
 
-        public static bool IsLoggedIn(this ISession session)
+        public static async Task<bool> IsLoggedInAsync(this ISession session)
         {
-             return session.GetInt32(USER_ID) != null;
+            await session.LoadAsync();
+
+            return session.GetInt32(USER_ID) != null;
         }
 
         public static void Logout(this ISession session)
@@ -31,19 +35,31 @@ namespace Microsoft.AspNetCore.Http
             session.Remove(USER_NAME);
         }
 
-        public static int GetUserId(this ISession session)
+        public static async Task<long> GetUserIdAsync(this ISession session)
         {
-             return (int)session.GetInt32(USER_ID);
+            await session.LoadAsync();
+
+            return (long)session.GetInt32(USER_ID);
         }
 
-        public static string GetUserName(this ISession session)
+        public static async Task<string> GetUserNameAsync(this ISession session)
         {
-             return session.GetString(USER_NAME);
+            await session.LoadAsync();
+
+            return session.GetString(USER_NAME);
         }
 
-        public static IUser GetUser(this ISession session, IUserService service)
+        public static async Task<User> GetUserAsync(
+            this ISession session,
+            IUserService service)
         {
-             return service.GetUser((int)session.GetInt32(USER_ID));
+            await session.LoadAsync();
+
+            var id = session.GetInt32(USER_ID);
+
+            if (id == null) return null;
+
+            return await service.GetUserAsync((long)id);
         }
     }
 }

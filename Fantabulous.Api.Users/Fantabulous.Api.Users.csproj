@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fantabulous.Api\Fantabulous.Api.csproj" />
-    <ProjectReference Include="..\Fantabulous.Redis\Fantabulous.Redis.csproj" />
-    <ProjectReference Include="..\Fantabulous.User\Fantabulous.User.csproj" />
+    <ProjectReference Include="..\Fantabulous.Core\Fantabulous.Core.csproj" />
+    <ProjectReference Include="..\Fantabulous.Users\Fantabulous.Users.csproj" />
   </ItemGroup>
 
   <ItemGroup>

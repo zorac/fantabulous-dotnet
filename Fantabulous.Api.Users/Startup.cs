@@ -1,7 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,10 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-using Fantabulous.Api.Options;
-using Fantabulous.User;
-
-namespace Fantabulous.Api.User
+namespace Fantabulous.Api.Users
 {
     public class Startup
     {
@@ -26,11 +19,10 @@ namespace Fantabulous.Api.User
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var sessionsOptions = Configuration.GetSection("Sessions").Get<SessionsOptions>();
-
             services.AddMvc();
-            services.AddFantabulousSession(sessionsOptions);
-            services.AddSingleton<IUserService,MockUserService>();
+            services.AddSessionServices(Configuration.GetSection("Sessions"));
+            services.AddUserServices(Configuration.GetSection("Users"));
+            services.AddAuthServices(Configuration.GetSection("Auth"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

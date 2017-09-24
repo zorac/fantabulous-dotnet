@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
@@ -7,29 +6,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 using Fantabulous.Api.Controllers;
-using Fantabulous.User;
+using Fantabulous.Core.Services;
 
-namespace Fantabulous.Api.User.Controllers
+namespace Fantabulous.Api.Users.Controllers
 {
-    [Route("api")]
+    [Route("api/auth")]
     public class AuthenticationController : FantabulousController
     {
-        private readonly IUserService Service;
+        private readonly IAuthService Service;
         private readonly ILogger Logger;
 
         public AuthenticationController(
-            IUserService userService,
+            IAuthService authService,
             ILogger<AuthenticationController> logger)
         {
-            Service = userService;
+            Service = authService;
             Logger = logger;
         }
 
-        // POST api/login
+        // POST api/auth/login
         [HttpPost("login")]
-        public ActionResult Login(string username, string password)
+        public async Task<ActionResult> Login(string username, string password)
         {
-            IUser user = Service.Login(username, password);
+            var user = await Service.LoginAsync(username, password);
 
             HttpContext.Session.Login(user);
             Logger.LogInformation("Logged in username {0}", username);
@@ -37,14 +36,14 @@ namespace Fantabulous.Api.User.Controllers
             return Json(user);
         }
 
-        // DELETE api/login
-        [HttpDelete("login")]
-        public ActionResult Logout()
+        // POST api/auth/logout
+        [HttpPost("logout")]
+        public async Task<ActionResult> Logout()
         {
-            if (HttpContext.Session.IsLoggedIn())
+            if (await HttpContext.Session.IsLoggedInAsync())
             {
                 Logger.LogInformation("Logged out username {0}",
-                     HttpContext.Session.GetUserName());
+                     await HttpContext.Session.GetUserNameAsync());
                 HttpContext.Session.Logout();
                 return BoolJson(true);
             }

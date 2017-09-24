@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 using Fantabulous.Api.Controllers;
-using Fantabulous.User;
+using Fantabulous.Core.Services;
 
-namespace Fantabulous.Api.User.Controllers
+namespace Fantabulous.Api.Users.Controllers
 {
     [Route("api/user")]
     public class UserController : FantabulousController
@@ -27,9 +27,9 @@ namespace Fantabulous.Api.User.Controllers
 
         // GET api/user/5
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            return PreJson(Service.GetUserJson(id));
+            return PreJson(await Service.GetUserJsonAsync(id));
         }
 
         // POST api/user

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Fantabulous.Mysql.Options
+namespace Fantabulous.Mysql
 {
     public class MysqlOptions
     {

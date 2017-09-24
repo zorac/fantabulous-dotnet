@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}/Fantabulous.Api.User/Fantabulous.Api.User.csproj"
+                "${workspaceRoot}/Fantabulous.sln"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"

@@ -1,6 +1,6 @@
 using System;
 
-namespace Fantabulous.User
+namespace Fantabulous.Core.Exceptions
 {
     public class AuthenticationException : Exception
     {
