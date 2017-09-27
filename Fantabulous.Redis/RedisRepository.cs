@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.Logging;
+
 using StackExchange.Redis;
 
 namespace Fantabulous.Redis
@@ -8,8 +10,11 @@ namespace Fantabulous.Redis
     public class RedisRepository : IDisposable
     {
         protected internal readonly ConnectionMultiplexer Redis;
+        protected internal readonly ILogger Logger;
 
-        public RedisRepository(RedisOptions options)
+        public RedisRepository(
+            RedisOptions options,
+            ILogger<RedisRepository> logger)
         {
             var config = new ConfigurationOptions
             {
@@ -22,6 +27,8 @@ namespace Fantabulous.Redis
             };
 
             Redis = ConnectionMultiplexer.Connect(config);
+            Logger = logger;
+            logger.LogInformation("Repository initialised");
         }
 
         public IDatabase GetDatabase()

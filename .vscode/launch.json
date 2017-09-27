@@ -5,14 +5,14 @@
    "version": "0.2.0",
    "configurations": [
         {
-            "name": "Launch All API",
+            "name": "Launch API",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceRoot}/Fantabulous.Api.All/bin/Debug/netcoreapp2.0/Fantabulous.Api.All.dll",
+            "program": "${workspaceRoot}/Fantabulous.Api/bin/Debug/netcoreapp2.0/Fantabulous.Api.dll",
             "args": [],
-            "cwd": "${workspaceRoot}/Fantabulous.Api.All",
+            "cwd": "${workspaceRoot}/Fantabulous.Api",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "env": {

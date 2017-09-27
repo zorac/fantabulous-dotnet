@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Fantabulous.Api.Users
+namespace Fantabulous.Api
 {
     public class Program
     {

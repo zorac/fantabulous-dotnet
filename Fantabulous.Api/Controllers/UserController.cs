@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,7 +13,7 @@ using Fantabulous.Core.Services;
 namespace Fantabulous.Api.Users.Controllers
 {
     [Route("api/user")]
-    public class UserController : FantabulousController
+    public class UserController : BaseController
     {
         private readonly IUserService Service;
         private readonly ILogger Logger;

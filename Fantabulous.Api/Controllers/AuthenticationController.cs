@@ -11,7 +11,7 @@ using Fantabulous.Core.Services;
 namespace Fantabulous.Api.Users.Controllers
 {
     [Route("api/auth")]
-    public class AuthenticationController : FantabulousController
+    public class AuthenticationController : BaseController
     {
         private readonly IAuthService Service;
         private readonly ILogger Logger;

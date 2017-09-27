@@ -1,4 +1,5 @@
 using System;
+
 using Microsoft.Extensions.Configuration;
 
 using Fantabulous.Core.Models;
@@ -14,10 +15,17 @@ namespace Microsoft.Extensions.DependencyInjection {
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var options = configuration.Get<UserOptions>()
-                ?? new UserOptions();
+            var options = configuration.GetSection("Users")
+                .Get<UserOptions>() ?? new UserOptions();
 
-            services.AddSingleton<IUserService,MockUserService>();
+            if (options.Mock)
+            {
+                services.AddSingleton<IUserService,MockUserService>();
+            }
+            else
+            {
+                services.AddSingleton<IUserService,SqlUserService>();
+            }
 
             if (options.Redis != null)
             {

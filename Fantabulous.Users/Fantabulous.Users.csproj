@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fantabulous.Core\Fantabulous.Core.csproj" />
+    <ProjectReference Include="..\Fantabulous.Mysql\Fantabulous.Mysql.csproj" />
     <ProjectReference Include="..\Fantabulous.Redis\Fantabulous.Redis.csproj" />
   </ItemGroup>
 

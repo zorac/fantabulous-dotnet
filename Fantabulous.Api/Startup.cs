@@ -5,28 +5,29 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Fantabulous.Api.Users
+namespace Fantabulous.Api
 {
     public class Startup
     {
+        private readonly IConfiguration Configuration;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            services.AddSessionServices(Configuration.GetSection("Sessions"));
-            services.AddUserServices(Configuration.GetSection("Users"));
-            services.AddAuthServices(Configuration.GetSection("Auth"));
+            services.AddMvcWithFilters();
+            services.AddSessionServices(Configuration);
+            services.AddMysqlServices(Configuration);
+            services.AddUserServices(Configuration);
+            services.AddAuthServices(Configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {

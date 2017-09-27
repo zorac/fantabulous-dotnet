@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.Logging;
 
 using Fantabulous.Core.Models;
@@ -15,6 +16,7 @@ namespace Fantabulous.Users
         public MockUserService(ILogger<MockUserService> logger)
         {
             Logger = logger;
+            logger.LogInformation("Service initialised");
         }
 
         public Task<User> GetUserAsync(long id)

@@ -6,7 +6,7 @@ using Fantabulous.Core.Services;
 
 namespace Microsoft.AspNetCore.Http
 {
-    public static class FantabulousSessionSessionExtensions
+    public static class ApiSessionExtensions
     {
         private const string USER_ID = "user_id";
         private const string USER_NAME = "user_name";

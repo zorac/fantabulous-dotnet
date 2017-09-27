@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.Logging;
+
 using Newtonsoft.Json;
 using StackExchange.Redis;
 
@@ -12,7 +14,10 @@ namespace Fantabulous.Redis
 {
     public class RedisIdCache<T> : RedisRepository, IIdCache<T> where T: HasId
     {
-        public RedisIdCache(RedisCacheOptions<T> options) : base(options)
+        public RedisIdCache(
+            RedisCacheOptions<T> options,
+            ILogger<RedisIdCache<T>> logger)
+            : base(options, logger)
         {
         }
 

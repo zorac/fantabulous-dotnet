@@ -1,18 +1,32 @@
 using System;
+
 using Microsoft.Extensions.Configuration;
 
+using Fantabulous.Api.Filters;
 using Fantabulous.Api.Options;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class FantabulousSessionServiceCollectionExtensions
+    public static class ApiServiceCollectionExtensions
     {
+        public static IServiceCollection AddMvcWithFilters(
+            this IServiceCollection services)
+        {
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ExceptionFilter));
+                options.Filters.Add(typeof(ValidationFilter));
+            });
+
+            return services;
+        }
+
         public static IServiceCollection AddSessionServices(
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var options = configuration.Get<SessionsOptions>()
-                ?? new SessionsOptions();
+            var options = configuration.GetSection("Sessions")
+                .Get<SessionsOptions>() ?? new SessionsOptions();
 
             if (options.Redis != null)
             {

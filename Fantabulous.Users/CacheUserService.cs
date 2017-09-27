@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
@@ -25,6 +26,7 @@ namespace Fantabulous.Users
             Cache = cache;
             Service = upstreamService;
             Logger = logger;
+            logger.LogInformation("Service initialised");
         }
 
         public async Task<User> GetUserAsync(long id)

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Fantabulous.Api.Controllers
 {
-    public abstract class FantabulousController : Controller
+    public abstract class BaseController : Controller
     {
         private const string JSON = "application/json";
 
