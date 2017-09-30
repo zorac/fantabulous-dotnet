@@ -15,11 +15,24 @@ using Fantabulous.Core.Services;
 
 namespace Fantabulous.Users
 {
+    /// <summary>
+    /// A user service using a SQL database backend.
+    /// </summary>
+    /// <inheritDoc/>
     public class SqlUserService : IUserService
     {
         private readonly ISqlRepository Repository;
         private readonly ILogger Logger;
 
+        /// <summary>
+        /// Creates a new SQL user service.
+        /// </summary>
+        /// <param name="repository">
+        /// The SQL repository to load data from.
+        /// </param>
+        /// <param name="logger">
+        /// A logger for this service.
+        /// </param>
         public SqlUserService(
             ISqlRepository repository,
             ILogger<SqlUserService> logger)

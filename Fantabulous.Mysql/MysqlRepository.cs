@@ -9,11 +9,23 @@ using Fantabulous.Core.Repositories;
 
 namespace Fantabulous.Mysql
 {
+    /// <summary>
+    /// A repository which connects to a MySQL database.
+    /// </summary>
     public class MysqlRepository : ISqlRepository
     {
         private readonly string ConnectionString;
         private readonly ILogger Logger;
 
+        /// <summary>
+        /// Create a new MySQL repository.
+        /// </summary>
+        /// <param name="options">
+        /// The options to use to create connections.
+        /// </param>
+        /// <param name="logger">
+        /// A logger for this repository.
+        /// </param>
         public MysqlRepository(
             MysqlOptions options,
             ILogger<MysqlRepository> logger)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
@@ -29,68 +30,34 @@ namespace Fantabulous.Users
             logger.LogInformation("Service initialised");
         }
 
-        public async Task<User> GetUserAsync(long id)
+        public Task<User> GetUserAsync(long id)
         {
-            var user = await Cache.GetAsync(id);
-
-            if (user == null)
-            {
-                user = await Service.GetUserAsync(id);
-                if (user != null) Cache.SetInBackground(user);
-            }
-
-            return user;
+            return Cache.GetAsync(id, Service.GetUserAsync);
         }
 
-        public async Task<User> GetUserAsync(string name)
+        public Task<User> GetUserAsync(string name)
         {
-            var user = await Cache.GetAsync(name);
-
-            if (user == null)
-            {
-                user = await Service.GetUserAsync(name);
-                if (user != null) Cache.SetInBackground(user);
-            }
-
-            return user;
+            return Cache.GetAsync(name, Service.GetUserAsync);
         }
 
         public Task<IEnumerable<User>> GetUsersAsync(IEnumerable<long> ids)
         {
-            throw new NotImplementedException();
+            return Cache.GetAsync(ids, Service.GetUsersAsync);
         }
 
-        public async Task<string> GetUserJsonAsync(long id)
+        public Task<string> GetUserJsonAsync(long id)
         {
-            var json = await Cache.GetJsonAsync(id);
-
-            if (json == null)
-            {
-                var user = await Service.GetUserAsync(id);
-
-                if (user != null) json = Cache.SetInBackground(user);
-            }
-
-            return json;
+            return Cache.GetJsonAsync(id, Service.GetUserAsync);
         }
 
-        public async Task<string> GetUserJsonAsync(string name)
+        public Task<string> GetUserJsonAsync(string name)
         {
-            var json = await Cache.GetJsonAsync(name);
-
-            if (json == null)
-            {
-                var user = await Service.GetUserAsync(name);
-
-                if (user != null) json = Cache.SetInBackground(user);
-            }
-
-            return json;
+            return Cache.GetJsonAsync(name, Service.GetUserAsync);
         }
 
         public Task<IEnumerable<string>> GetUsersJsonAsync(IEnumerable<long> ids)
         {
-            throw new NotImplementedException();
+            return Cache.GetJsonAsync(ids, Service.GetUsersAsync);
         }
     }
 }

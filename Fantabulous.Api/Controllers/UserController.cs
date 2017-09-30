@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
@@ -20,38 +18,31 @@ namespace Fantabulous.Api.Users.Controllers
 
         public UserController(
             IUserService userService,
-            ILogger<AuthenticationController> logger)
+            ILogger<UserController> logger)
         {
             Service = userService;
             Logger = logger;
         }
 
-        // GET api/user/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        // GET api/user/id/123
+        [HttpGet("id/{id}")]
+        public async Task<ActionResult> GetById(long id)
         {
             return PreJson(await Service.GetUserJsonAsync(id));
         }
 
-        // POST api/user
-        [HttpPost]
-        public ActionResult Post([FromBody]string value)
+        // GET api/user/name/example
+        [HttpGet("name/{name}")]
+        public async Task<ActionResult> GetByName(string name)
         {
-            throw new NotImplementedException();
+            return PreJson(await Service.GetUserJsonAsync(name));
         }
 
-        // PUT api/user/5
-        [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody]string value)
+        // GET api/user/ids/123,456,789
+        [HttpGet("ids/{ids}")]
+        public async Task<ActionResult> GetByIds(string ids)
         {
-            throw new NotImplementedException();
-        }
-
-        // DELETE api/user/5
-        [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
-        {
-            throw new NotImplementedException();
+            return PreJson(await Service.GetUsersJsonAsync(ParseIds(ids)));
         }
     }
 }

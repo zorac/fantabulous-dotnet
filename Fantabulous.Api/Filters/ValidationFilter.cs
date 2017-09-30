@@ -10,10 +10,20 @@ using Fantabulous.Core.Exceptions;
 
 namespace Fantabulous.Api.Filters
 {
+    /// <summary>
+    /// A filter which validates input model states.
+    /// </summary>
+    /// <inheritDoc/>
     public class ValidationFilter : IActionFilter
     {
         private ILogger Logger { get; }
 
+        /// <summary>
+        /// Create a new filter.
+        /// </summary>
+        /// <param name="logger">
+        /// A logger for this filter
+        /// </param>
         public ValidationFilter(ILogger<ValidationFilter> logger)
         {
             Logger = logger;

@@ -65,6 +65,22 @@ namespace Fantabulous.Users
             return Task.FromResult<IEnumerable<string>>(users);
         }
 
+        public Task<User> CreateUserAsync(string username, string password)
+        {
+            if (NameHasId(username, out int id))
+            {
+                Logger.LogInformation("Created username {0}",
+                    username);
+                return Task.FromResult<User>(new User(id, username));
+            }
+            else
+            {
+                Logger.LogError("User create failed: invalid username {0}", username);
+                throw new AuthenticationException(
+                    "Invalid username, must be 'user<id>'");
+            }
+        }
+
         public Task<User> LoginAsync(string username, string password)
         {
             if (NameHasId(username, out int id))
@@ -81,9 +97,9 @@ namespace Fantabulous.Users
             }
         }
 
-        public Task<bool> ChangePasswordAsync(long id, string oldPassword, string newPassword)
+        public Task ChangePasswordAsync(long id, string oldPassword, string newPassword)
         {
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
         private bool NameHasId(string name, out int id)

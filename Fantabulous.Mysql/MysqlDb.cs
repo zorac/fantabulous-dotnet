@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading.Tasks;
 
+using Dapper;
 using MySql.Data.MySqlClient;
 
 using Fantabulous.Core.DataAccess;
@@ -10,14 +12,26 @@ using Fantabulous.Mysql.DataAccess;
 
 namespace Fantabulous.Mysql
 {
+    /// <summary>
+    /// Wrapper around a MySQL database connection. This will close the
+    /// underlying connection on disposal (including rolling back any
+    /// uncommitted transaction).
+    /// </summary>
     public class MysqlDb : ISqlDb
     {
         // TODO maybe lazy-initialise these?
         public IUserDao Users => new MysqlUserDao(this);
 
         private readonly MySqlConnection Connection;
+
         private MySqlTransaction Transaction;
 
+        /// <summary>
+        /// Create a new database connection wrapper.
+        /// </summary>
+        /// <param name="connection">
+        /// The connection to wrap; must already be opened.
+        /// </param>
         internal MysqlDb(MySqlConnection connection)
         {
             Connection = connection;
@@ -25,7 +39,24 @@ namespace Fantabulous.Mysql
 
         public void Dispose()
         {
+            Transaction?.Rollback();
             Connection?.Close();
+            Connection?.Dispose();
+        }
+
+        public Task<T> QueryFirstOrDefaultAsync<T>(
+            string sql,
+            object param = null)
+        {
+            return Connection.QueryFirstOrDefaultAsync<T>(sql, param,
+                Transaction);
+        }
+
+        public Task<IEnumerable<T>> QueryAsync<T>(
+            string sql,
+            object param = null)
+        {
+            return Connection.QueryAsync<T>(sql, param, Transaction);
         }
 
         public async Task BeginAsync()
@@ -33,11 +64,6 @@ namespace Fantabulous.Mysql
             if (Transaction != null) throw new InvalidOperationException(
                 "A transaction is already in progress");
             Transaction = await Connection.BeginTransactionAsync();
-        }
-
-        public DbCommand Command(string sql)
-        {
-            return new MySqlCommand(sql, Connection, Transaction);
         }
 
         public async Task CommitAsync()

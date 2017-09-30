@@ -12,8 +12,21 @@ using Fantabulous.Core.Repositories;
 
 namespace Fantabulous.Redis
 {
+    /// <summary>
+    /// An ID-based cache backed by a Redis key/value store.
+    /// </summary>
+    /// <inheritDoc/>
     public class RedisIdCache<T> : RedisRepository, IIdCache<T> where T: HasId
     {
+        /// <summary>
+        /// Create a new Redis cache.
+        /// </summary>
+        /// <param name="options">
+        /// Options to use to set up the Redis connection.
+        /// </param>
+        /// <param name="logger">
+        /// A logger to use for this repository.
+        /// </param>
         public RedisIdCache(
             RedisCacheOptions<T> options,
             ILogger<RedisIdCache<T>> logger)
@@ -31,7 +44,7 @@ namespace Fantabulous.Redis
                 : JsonConvert.DeserializeObject<T>(json);
         }
 
-        public async Task<T[]> GetAsync(IEnumerable<long> ids)
+        public async Task<IEnumerable<T>> GetAsync(IEnumerable<long> ids)
         {
             var keys = ids.Select(id => (RedisKey)id.ToString()).ToArray();
             var length = keys.Length;
@@ -59,7 +72,7 @@ namespace Fantabulous.Redis
             return json.IsNullOrEmpty ? null : (string)json;
         }
 
-        public async Task<string[]> GetJsonAsync(IEnumerable<long> ids)
+        public async Task<IEnumerable<string>> GetJsonAsync(IEnumerable<long> ids)
         {
             var keys = ids.Select(id => (RedisKey)id.ToString()).ToArray();
             var length = keys.Length;
@@ -77,14 +90,6 @@ namespace Fantabulous.Redis
             return results;
         }
 
-        virtual public void SetInBackground(long id, string json)
-        {
-            var key = id.ToString();
-            var redis = Redis.GetDatabase();
-
-            redis.StringSet(key, json, flags: CommandFlags.FireAndForget);
-        }
-
         virtual public string SetInBackground(T value)
         {
             var key = value.Id.ToString();
@@ -94,6 +99,14 @@ namespace Fantabulous.Redis
             redis.StringSet(key, json, flags: CommandFlags.FireAndForget);
 
             return json;
+        }
+
+        public void SetInBackground(long id, string json)
+        {
+            var key = id.ToString();
+            var redis = Redis.GetDatabase();
+
+            redis.StringSet(key, json, flags: CommandFlags.FireAndForget);
         }
     }
 }

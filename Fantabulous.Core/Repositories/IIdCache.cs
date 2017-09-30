@@ -5,13 +5,21 @@ using Fantabulous.Core.Models;
 
 namespace Fantabulous.Core.Repositories
 {
-    public interface IIdCache<T> where T: HasId
+    /// <summary>
+    /// A cache which stores and retrieves objects using unique IDs.
+    /// </summary>
+    /// <inheritDoc/>
+    public interface IIdCache<T> : IIdCacheCommon<T> where T: HasId
     {
-        Task<T> GetAsync(long id);
-        Task<T[]> GetAsync(IEnumerable<long> ids);
-        Task<string> GetJsonAsync(long id);
-        Task<string[]> GetJsonAsync(IEnumerable<long> ids);
+        /// <summary>
+        /// Set/update the cached value for a unique ID.
+        /// </summary>
+        /// <param name="id">
+        /// A unique ID
+        /// </param>
+        /// <param name="json">
+        /// A JSON representation of the object
+        /// </param>
         void SetInBackground(long id, string json);
-        string SetInBackground(T value);
     }
 }

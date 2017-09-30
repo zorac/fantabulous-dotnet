@@ -8,10 +8,20 @@ using Fantabulous.Core.Exceptions;
 
 namespace Fantabulous.Api.Filters
 {
+    /// <summary>
+    /// A filter which handles uncaught exceptions.
+    /// </summary>
+    /// <inheritDoc/>
     public class ExceptionFilter : IExceptionFilter
     {
         private readonly ILogger Logger;
 
+        /// <summary>
+        /// Create a new filter.
+        /// </summary>
+        /// <param name="logger">
+        /// A logger for this filter
+        /// </param>
         public ExceptionFilter(ILogger<ExceptionFilter> logger)
         {
             Logger = logger;

@@ -3,13 +3,13 @@ using System;
 namespace Fantabulous.Core.Exceptions
 {
     /// <summary>
-    /// An exception thrown due to a failure to authenticate a user.
+    /// An exception thrown at startup due to an invalid configuration.
     /// </summary>
     /// <inheritDoc/>
-    public class AuthenticationException : Exception
+    public class InvalidConfigurationException : Exception
     {
         /// <summary>
-        /// Create a new authentication exception.
+        /// Create a new invalid configuration exception.
         /// </summary>
         /// <param name="message">
         /// A message describing the error
@@ -17,7 +17,7 @@ namespace Fantabulous.Core.Exceptions
         /// <param name="innerException">
         /// An optional underlying exception
         /// </param>
-        public AuthenticationException(
+        public InvalidConfigurationException(
             string message,
             Exception innerException = null)
             : base(message, innerException)

@@ -5,15 +5,47 @@ using Fantabulous.Core.Models;
 
 namespace Fantabulous.Core.Repositories
 {
-    public interface IIdNameCache<T> where T: HasName
+    /// <summary>
+    /// A cache which stores and retrieves objects using both unique IDs and
+    /// names.
+    /// </summary>
+    /// <inheritDoc/>
+    public interface IIdNameCache<T> : IIdCacheCommon<T>  where T: HasName
     {
-        Task<T> GetAsync(long id);
+        /// <summary>
+        /// Fetch the cached object for a given name.
+        /// </summary>
+        /// <param name="name">
+        /// A name
+        /// </param>
+        /// <returns>
+        /// The cached object, or null if none found
+        /// </returns>
         Task<T> GetAsync(string name);
-        Task<T[]> GetAsync(IEnumerable<long> ids);
-        Task<string> GetJsonAsync(long id);
+
+        /// <summary>
+        /// Fetch a JSON representation of the cached object for a given name.
+        /// </summary>
+        /// <param name="name">
+        /// A name
+        /// </param>
+        /// <returns>
+        /// JSON of the cached object, or null if not found
+        /// </returns>
         Task<string> GetJsonAsync(string name);
-        Task<string[]> GetJsonAsync(IEnumerable<long> ids);
+
+        /// <summary>
+        /// Set/update the cached value for a unique ID and name.
+        /// </summary>
+        /// <param name="id">
+        /// A unique ID
+        /// </param>
+        /// <param name="name">
+        /// A name
+        /// </param>
+        /// <param name="json">
+        /// A JSON representation of the object
+        /// </param>
         void SetInBackground(long id, string name, string json);
-        string SetInBackground(T value);
     }
 }

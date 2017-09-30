@@ -4,12 +4,19 @@ using Microsoft.Extensions.Configuration;
 
 using Fantabulous.Api.Filters;
 using Fantabulous.Api.Options;
+using Fantabulous.Core.Exceptions;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
+    /// <summary>
+    /// Some extensions for adding to a service collection.
+    /// </summary>
     public static class ApiServiceCollectionExtensions
     {
-        public static IServiceCollection AddMvcWithFilters(
+        /// <summary>
+        /// Add MVC services, additionally configuring some filters.
+        /// </summary>
+        public static void AddMvcWithFilters(
             this IServiceCollection services)
         {
             services.AddMvc(options =>
@@ -17,11 +24,16 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.Filters.Add(typeof(ExceptionFilter));
                 options.Filters.Add(typeof(ValidationFilter));
             });
-
-            return services;
         }
 
-        public static IServiceCollection AddSessionServices(
+        /// <summary>
+        /// Add the services required to support sessions to a service
+        /// collection.
+        /// </summary>
+        /// <param name="configuration">
+        /// A configuration containing a "Sessions" section
+        /// </param>
+        public static void AddSessionServices(
             this IServiceCollection services,
             IConfiguration configuration)
         {
@@ -30,6 +42,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (options.Redis != null)
             {
+                options.Redis.Validate("Sessions");
                 services.AddDistributedRedisCache(redisOptions =>
                 {
                     redisOptions.Configuration =
@@ -37,9 +50,14 @@ namespace Microsoft.Extensions.DependencyInjection
                     redisOptions.InstanceName = "sessions";
                 });
             }
-            else
+            else if (options.Memory)
             {
                 services.AddDistributedMemoryCache();
+            }
+            else
+            {
+                throw new InvalidConfigurationException(
+                    "No session storage specified");
             }
 
             services.AddSession(sessionOptions =>
@@ -48,8 +66,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 sessionOptions.Cookie.HttpOnly = true;
                 sessionOptions.IdleTimeout = options.Timeout;
             });
-
-            return services;
         }
     }
 }
