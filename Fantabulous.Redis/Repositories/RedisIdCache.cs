@@ -7,10 +7,11 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 
-using Fantabulous.Core.Models;
+using Fantabulous.Core.Entities;
 using Fantabulous.Core.Repositories;
+using Fantabulous.Redis.Options;
 
-namespace Fantabulous.Redis
+namespace Fantabulous.Redis.Repositories
 {
     /// <summary>
     /// An ID-based cache backed by a Redis key/value store.

@@ -2,10 +2,11 @@ using System;
 
 using Microsoft.Extensions.Configuration;
 
-using Fantabulous.Core.Models;
+using Fantabulous.Core.Entities;
 using Fantabulous.Core.Repositories;
 using Fantabulous.Core.Services;
-using Fantabulous.Mysql;
+using Fantabulous.Mysql.Options;
+using Fantabulous.Mysql.Repositories;
 
 namespace Microsoft.Extensions.DependencyInjection {
     /// <summary>

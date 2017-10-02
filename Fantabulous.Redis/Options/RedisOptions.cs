@@ -1,6 +1,6 @@
 using Fantabulous.Core.Exceptions;
 
-namespace Fantabulous.Redis
+namespace Fantabulous.Redis.Options
 {
     /// <summary>
     /// Options for a Redis repository.

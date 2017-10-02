@@ -1,4 +1,4 @@
-# Fantabulous -- .Net Backend
+# Fantabulous — .Net Backend
 
 A multi-fandom fanwork archive.
 

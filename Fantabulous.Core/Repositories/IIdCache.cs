@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using Fantabulous.Core.Models;
+using Fantabulous.Core.Entities;
 
 namespace Fantabulous.Core.Repositories
 {

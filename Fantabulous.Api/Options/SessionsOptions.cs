@@ -1,6 +1,6 @@
 using System;
 
-using Fantabulous.Redis;
+using Fantabulous.Redis.Options;
 
 namespace Fantabulous.Api.Options
 {

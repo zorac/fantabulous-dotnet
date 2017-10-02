@@ -1,6 +1,6 @@
-using Fantabulous.Core.Models;
+using Fantabulous.Core.Entities;
 
-namespace Fantabulous.Redis
+namespace Fantabulous.Redis.Options
 {
     /// <summary>
     /// Options for a Redis cache.

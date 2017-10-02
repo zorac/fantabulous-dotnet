@@ -1,7 +1,7 @@
-using Fantabulous.Core.Models;
-using Fantabulous.Redis;
+using Fantabulous.Core.Entities;
+using Fantabulous.Redis.Options;
 
-namespace Fantabulous.Users
+namespace Fantabulous.Users.Options
 {
     /// <summary>
     /// Configuration options for the user service.

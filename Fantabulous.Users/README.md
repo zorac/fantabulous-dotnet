@@ -1,3 +1,3 @@
-# Fantabulous.Net -- Users
+# Fantabulous.Net — Users
 
-User data access for Fantabulous.
+Concrete implemntations of user data access for Fantabulous.

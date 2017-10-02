@@ -3,11 +3,12 @@ using System;
 using Microsoft.Extensions.Configuration;
 
 using Fantabulous.Core.Exceptions;
-using Fantabulous.Core.Models;
+using Fantabulous.Core.Entities;
 using Fantabulous.Core.Repositories;
 using Fantabulous.Core.Services;
-using Fantabulous.Redis;
-using Fantabulous.Users;
+using Fantabulous.Redis.Repositories;
+using Fantabulous.Users.Options;
+using Fantabulous.Users.Services;
 
 namespace Microsoft.Extensions.DependencyInjection {
     /// <summary>
@@ -15,6 +16,34 @@ namespace Microsoft.Extensions.DependencyInjection {
     /// </summary>
     public static class UserServiceCollectionExtensions
     {
+        /// <summary>
+        /// Add authentication services to the given service collection.
+        /// </summary>
+        /// <param name="configuration">
+        /// A configuration containing an "Auth" section.
+        /// </param>
+        public static void AddAuthServices(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var options = configuration.GetSection("Auth")
+                .Get<AuthOptions>() ?? new AuthOptions();
+
+            if (options.Sql)
+            {
+                services.AddSingleton<IAuthService,SqlAuthService>();
+            }
+            else if (options.Mock)
+            {
+                services.AddSingleton<IAuthService,MockUserService>();
+            }
+            else
+            {
+                throw new InvalidConfigurationException(
+                    "No back-end auth service specified, eg Auth.Sql=true");
+            }
+        }
+
         /// <summary>
         /// Add user services to the given service collection.
         /// </summary>
@@ -52,16 +81,39 @@ namespace Microsoft.Extensions.DependencyInjection {
         }
 
         /// <summary>
-        /// Add authentication services to the given service collection.
+        /// Add pseudonym services to the given service collection.
         /// </summary>
         /// <param name="configuration">
-        /// A configuration containing an "Auth" section.
+        /// A configuration containing a "Pseuds" section.
         /// </param>
-        public static void AddAuthServices(
+        public static void AddPseudServices(
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddSingleton<IAuthService,MockUserService>();
+            var options = configuration.GetSection("Pseuds")
+                .Get<PseudOptions>() ?? new PseudOptions();
+
+            if (options.Sql)
+            {
+                services.AddSingleton<IPseudService,SqlPseudService>();
+            }
+            else if (options.Mock)
+            {
+                services.AddSingleton<IPseudService,MockUserService>();
+            }
+            else
+            {
+                throw new InvalidConfigurationException(
+                    "No back-end pseud service specified, eg Pseuds.Sql=true");
+            }
+
+            if (options.Redis != null)
+            {
+                options.Redis.Validate("Pseuds");
+                services.AddSingleton(options.Redis);
+                services.AddSingleton<IIdCache<Pseud>,RedisIdCache<Pseud>>();
+                services.Decorate<IPseudService,CachePseudService>();
+            }
         }
     }
 }

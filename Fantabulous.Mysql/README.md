@@ -1,3 +1,3 @@
-# Fantabulous.Net -- MySQL
+# Fantabulous.Net — MySQL
 
-MySQL data access for Fantabulous.
+Concrete implementations of MySQL data access for Fantabulous.

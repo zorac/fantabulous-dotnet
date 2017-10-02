@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using Fantabulous.Core.Models;
+using Fantabulous.Core.Entities;
+using Fantabulous.Core.Exceptions;
 
 namespace Fantabulous.Core.DataAccess
 {
@@ -43,5 +44,62 @@ namespace Fantabulous.Core.DataAccess
         /// The user record, or null if none found
         /// </returns>
         Task<User> ForNameAsync(string name);
+
+        /// <summary>
+        /// Create a new user.
+        /// </summary>
+        /// <param name="username">
+        /// The username to use
+        /// </param>
+        /// <param name="password">
+        /// A password to user
+        /// </param>
+        /// <param name="email">
+        /// An emauk address to use
+        /// </param>
+        /// <returns>
+        /// The newly-created user
+        /// </returns>
+        /// <exception cref="AuthenticationException">
+        /// If the user could not be created
+        /// </exception>
+        Task<User> CreateAsync(string username, string password, string email);
+
+        /// <summary>
+        /// Fetch a user via their login credentials.
+        /// </summary>
+        /// <param name="username">
+        /// A login username
+        /// </param>
+        /// <param name="password">
+        /// A login password
+        /// </param>
+        /// <returns>
+        /// The user to log in
+        /// </returns>
+        /// <exception cref="AuthenticationException">
+        /// If the credentials are incorrect
+        /// </exception>
+        Task<User> LoginAsync(string username, string password);
+
+        /// <summary>
+        /// Change a user's password
+        /// </summary>
+        /// <param name="id">
+        /// A user ID
+        /// </param>
+        /// <param name="oldPassword">
+        /// The user's current password
+        /// </param>
+        /// <param name="newPassword">
+        /// A new password
+        /// </param>
+        /// <exception cref="AuthenticationException">
+        /// Thrown if the password change failed
+        /// </exception>
+        Task ChangePasswordAsync(
+            long id,
+            string oldPassword,
+            string newPassword);
     }
 }

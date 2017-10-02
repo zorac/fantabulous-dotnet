@@ -1,17 +1,13 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
 
-using Newtonsoft.Json;
-
-using Fantabulous.Core.Models;
+using Fantabulous.Core.Entities;
 using Fantabulous.Core.Repositories;
 using Fantabulous.Core.Services;
 
-namespace Fantabulous.Users
+namespace Fantabulous.Users.Services
 {
     public class CacheUserService : IUserService
     {

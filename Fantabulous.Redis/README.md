@@ -1,3 +1,3 @@
-# Fantabulous.Net -- Redis
+# Fantabulous.Net — Redis
 
-Redis data access for Fantabulous.
+Concrete implementations of Redis data access for Fantabulous.

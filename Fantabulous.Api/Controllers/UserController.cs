@@ -5,10 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-using Fantabulous.Api.Controllers;
 using Fantabulous.Core.Services;
 
-namespace Fantabulous.Api.Users.Controllers
+namespace Fantabulous.Api.Controllers
 {
     [Route("api/user")]
     public class UserController : BaseController

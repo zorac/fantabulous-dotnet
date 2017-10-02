@@ -9,23 +9,23 @@ using Newtonsoft.Json;
 
 using Fantabulous.Core.DataAccess;
 using Fantabulous.Core.Exceptions;
-using Fantabulous.Core.Models;
+using Fantabulous.Core.Entities;
 using Fantabulous.Core.Repositories;
 using Fantabulous.Core.Services;
 
-namespace Fantabulous.Users
+namespace Fantabulous.Users.Services
 {
     /// <summary>
-    /// A user service using a SQL database backend.
+    /// A pseudonym service using a SQL database backend.
     /// </summary>
     /// <inheritDoc/>
-    public class SqlUserService : IUserService
+    public class SqlPseudService : IPseudService
     {
         private readonly ISqlRepository Repository;
         private readonly ILogger Logger;
 
         /// <summary>
-        /// Creates a new SQL user service.
+        /// Creates a new SQL pseudonym service.
         /// </summary>
         /// <param name="repository">
         /// The SQL repository to load data from.
@@ -33,64 +33,64 @@ namespace Fantabulous.Users
         /// <param name="logger">
         /// A logger for this service.
         /// </param>
-        public SqlUserService(
+        public SqlPseudService(
             ISqlRepository repository,
-            ILogger<SqlUserService> logger)
+            ILogger<SqlPseudService> logger)
         {
             Repository = repository;
             Logger = logger;
             logger.LogInformation("Service initialised");
         }
 
-        public async Task<User> GetUserAsync(long id)
+        public async Task<Pseud> GetPseudAsync(long id)
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                return await db.Users.ForIdAsync(id);
+                return await db.Pseuds.ForIdAsync(id);
             }
         }
 
-        public async Task<User> GetUserAsync(string name)
+        public async Task<Pseud> GetPseudAsync(long userId, string name)
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                return await db.Users.ForNameAsync(name);
+                return await db.Pseuds.ForUserAndNameAsync(userId, name);
             }
         }
 
-        public async Task<IEnumerable<User>> GetUsersAsync(
+        public async Task<IEnumerable<Pseud>> GetPseudsAsync(
             IEnumerable<long> ids)
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                return await db.Users.ForIdsAsync(ids);
+                return await db.Pseuds.ForIdsAsync(ids);
             }
         }
 
-        public async Task<string> GetUserJsonAsync(long id)
+        public async Task<string> GetPseudJsonAsync(long id)
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
                 return JsonConvert.SerializeObject(
-                    await db.Users.ForIdAsync(id));
+                    await db.Pseuds.ForIdAsync(id));
             }
         }
 
-        public async Task<string> GetUserJsonAsync(string name)
+        public async Task<string> GetPseudJsonAsync(long userId, string name)
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
                 return JsonConvert.SerializeObject(
-                    await db.Users.ForNameAsync(name));
+                    await db.Pseuds.ForUserAndNameAsync(userId, name));
             }
         }
 
-        public async Task<IEnumerable<string>> GetUsersJsonAsync(
+        public async Task<IEnumerable<string>> GetPseudsJsonAsync(
             IEnumerable<long> ids)
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                return (await db.Users.ForIdsAsync(ids))
+                return (await db.Pseuds.ForIdsAsync(ids))
                     .Select(u => JsonConvert.SerializeObject(u));
             }
         }

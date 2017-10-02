@@ -1,6 +1,6 @@
 using Fantabulous.Core.Exceptions;
 
-namespace Fantabulous.Mysql
+namespace Fantabulous.Mysql.Options
 {
     /// <summary>
     /// Options used to connect to a MySQL database.

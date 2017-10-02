@@ -5,7 +5,9 @@ using Microsoft.Extensions.Logging;
 
 using StackExchange.Redis;
 
-namespace Fantabulous.Redis
+using Fantabulous.Redis.Options;
+
+namespace Fantabulous.Redis.Repositories
 {
     /// <summary>
     /// A repository which uses a Redis key/value store.

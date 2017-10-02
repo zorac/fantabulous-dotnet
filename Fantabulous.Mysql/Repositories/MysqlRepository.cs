@@ -6,8 +6,9 @@ using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 
 using Fantabulous.Core.Repositories;
+using Fantabulous.Mysql.Options;
 
-namespace Fantabulous.Mysql
+namespace Fantabulous.Mysql.Repositories
 {
     /// <summary>
     /// A repository which connects to a MySQL database.

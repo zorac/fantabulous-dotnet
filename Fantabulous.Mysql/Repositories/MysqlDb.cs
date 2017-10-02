@@ -10,7 +10,7 @@ using Fantabulous.Core.DataAccess;
 using Fantabulous.Core.Repositories;
 using Fantabulous.Mysql.DataAccess;
 
-namespace Fantabulous.Mysql
+namespace Fantabulous.Mysql.Repositories
 {
     /// <summary>
     /// Wrapper around a MySQL database connection. This will close the
@@ -21,6 +21,7 @@ namespace Fantabulous.Mysql
     {
         // TODO maybe lazy-initialise these?
         public IUserDao Users => new MysqlUserDao(this);
+        public IPseudDao Pseuds => new MysqlPseudDao(this);
 
         private readonly MySqlConnection Connection;
 
@@ -44,12 +45,11 @@ namespace Fantabulous.Mysql
             Connection?.Dispose();
         }
 
-        public Task<T> QueryFirstOrDefaultAsync<T>(
+        public Task<int> ExecuteAsync(
             string sql,
             object param = null)
         {
-            return Connection.QueryFirstOrDefaultAsync<T>(sql, param,
-                Transaction);
+            return Connection.ExecuteAsync(sql, param, Transaction);
         }
 
         public Task<IEnumerable<T>> QueryAsync<T>(
@@ -57,6 +57,14 @@ namespace Fantabulous.Mysql
             object param = null)
         {
             return Connection.QueryAsync<T>(sql, param, Transaction);
+        }
+
+        public Task<T> QueryFirstAsync<T>(
+            string sql,
+            object param = null)
+        {
+            return Connection.QueryFirstOrDefaultAsync<T>(sql, param,
+                Transaction);
         }
 
         public async Task BeginAsync()

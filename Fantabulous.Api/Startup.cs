@@ -36,8 +36,9 @@ namespace Fantabulous.Api
             services.AddMvcWithFilters();
             services.AddSessionServices(Configuration);
             services.AddMysqlServices(Configuration);
-            services.AddUserServices(Configuration);
             services.AddAuthServices(Configuration);
+            services.AddUserServices(Configuration);
+            services.AddPseudServices(Configuration);
         }
 
         /// <summary>
