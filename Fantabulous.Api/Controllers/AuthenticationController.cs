@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
+using Fantabulous.Core.Requests;
 using Fantabulous.Core.Services;
 
 namespace Fantabulous.Api.Controllers
@@ -25,14 +26,14 @@ namespace Fantabulous.Api.Controllers
 
         // POST api/auth/login
         [HttpPost("login")]
-        public async Task<ActionResult> Login(string username, string password)
+        public async Task<ActionResult> Login([FromBody] LoginRequest request)
         {
-            var user = await Service.LoginAsync(username, password);
+            var response = await Service.LoginAsync(request);
 
-            HttpContext.Session.Login(user);
-            Logger.LogInformation("Logged in username {0}", username);
+            HttpContext.Session.Login(response.User, response.Pseud);
+            Logger.LogInformation("Logged in username {0}", request.Username);
 
-            return Json(user);
+            return Json(response);
         }
 
         // POST api/auth/logout

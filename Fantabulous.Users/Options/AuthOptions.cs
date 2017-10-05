@@ -9,10 +9,5 @@ namespace Fantabulous.Users.Options
         /// Set to true to include a SQL auth service.
         /// </summary>
         public bool Sql { get; set; } = false;
-
-        /// <summary>
-        /// Set to true to include a Mock auth service.
-        /// </summary>
-        public bool Mock { get; set; } = false;
     }
 }

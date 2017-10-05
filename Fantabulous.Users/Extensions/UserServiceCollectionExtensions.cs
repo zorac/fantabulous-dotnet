@@ -33,10 +33,6 @@ namespace Microsoft.Extensions.DependencyInjection {
             {
                 services.AddSingleton<IAuthService,SqlAuthService>();
             }
-            else if (options.Mock)
-            {
-                services.AddSingleton<IAuthService,MockUserService>();
-            }
             else
             {
                 throw new InvalidConfigurationException(
@@ -60,10 +56,6 @@ namespace Microsoft.Extensions.DependencyInjection {
             if (options.Sql)
             {
                 services.AddSingleton<IUserService,SqlUserService>();
-            }
-            else if (options.Mock)
-            {
-                services.AddSingleton<IUserService,MockUserService>();
             }
             else
             {
@@ -96,10 +88,6 @@ namespace Microsoft.Extensions.DependencyInjection {
             if (options.Sql)
             {
                 services.AddSingleton<IPseudService,SqlPseudService>();
-            }
-            else if (options.Mock)
-            {
-                services.AddSingleton<IPseudService,MockUserService>();
             }
             else
             {

@@ -1,0 +1,54 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Fantabulous.Core.Entities;
+using Fantabulous.Core.Types;
+
+namespace Fantabulous.Core.DataAccess
+{
+    /// <summary>
+    /// A data-access object for tags.
+    /// </summary>
+    public interface ITagDao
+    {
+        /// <summary>
+        /// Fetch the tag record for a unique ID.
+        /// </summary>
+        /// <param name="id">
+        /// A tag ID
+        /// </param>
+        /// <returns>
+        /// The tag record, or null if none found
+        /// </returns>
+        Task<Tag> ForIdAsync(long id);
+
+        /// <summary>
+        /// Fetch the tag objects for multiple unique IDs.
+        /// </summary>
+        /// <param name="ids">
+        /// Some tag IDs
+        /// </param>
+        /// <returns>
+        /// The tag objects which were found, in no specific order, empty if
+        /// none were found
+        /// </returns>
+        Task<IEnumerable<Tag>> ForIdsAsync(IEnumerable<long> ids);
+
+        /// <summary>
+        /// Create a new tag.
+        /// </summary>
+        /// <param name="type">
+        /// A tag type
+        /// </param>
+        /// <param name="aliasFor">
+        /// The unique ID of the tag this is an alias for, or 0 for canonical.
+        /// </param>
+        /// <param name="name">
+        /// A tag name
+        /// </param>
+        /// <returns>
+        /// The newly-created tag
+        /// </returns>
+        Task<Tag> CreateAsync(TagType type, long aliasFor, string name);
+    }
+}

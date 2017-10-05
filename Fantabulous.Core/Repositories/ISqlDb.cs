@@ -25,6 +25,26 @@ namespace Fantabulous.Core.Repositories
         IPseudDao Pseuds { get; }
 
         /// <summary>
+        /// A data-access object for tags tied to this connection.
+        /// </summary>
+        ITagDao Tags { get; }
+
+        /// <summary>
+        /// A data-access object for works tied to this connection.
+        /// </summary>
+        IWorkDao Works { get; }
+
+        /// <summary>
+        /// A data-access object for chapters tied to this connection.
+        /// </summary>
+        IChapterDao Chapters { get; }
+
+        /// <summary>
+        /// A data-access object for series tied to this connection.
+        /// </summary>
+        ISeriesDao Series { get; }
+
+        /// <summary>
         /// Execute a SQL query which returns no results.
         /// </summary>
         /// <param name="sql">

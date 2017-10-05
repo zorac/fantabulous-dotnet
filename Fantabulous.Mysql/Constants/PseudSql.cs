@@ -6,16 +6,16 @@ namespace Fantabulous.Mysql.Constants
     internal static class PseudSql
     {
         private const string Select = @"
-            SELECT  pseud_id    AS Id,
-                    user_id     AS UserId,
-                    name        AS Name
+            SELECT  id      AS Id,
+                    user_id AS UserId,
+                    name    AS Name
             FROM    pseuds";
 
         internal const string SelectById = Select + @"
-            WHERE   pseud_id = @Id;";
+            WHERE   id = @Id;";
 
         internal const string SelectByIds = Select + @"
-            WHERE   pseud_id IN @Ids;";
+            WHERE   id IN @Ids;";
 
         internal const string SelectByUserAndName = Select + @"
             WHERE   user_id = @UserId

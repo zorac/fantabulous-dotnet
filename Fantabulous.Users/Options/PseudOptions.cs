@@ -17,10 +17,5 @@ namespace Fantabulous.Users.Options
         /// Set to true to include a SQL pseudonym service.
         /// </summary>
         public bool Sql { get; set; } = false;
-
-        /// <summary>
-        /// Set to true to include a Mock pseudonym service.
-        /// </summary>
-        public bool Mock { get; set; } = false;
     }
 }

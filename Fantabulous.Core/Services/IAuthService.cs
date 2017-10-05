@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
 
-using Fantabulous.Core.Exceptions;
 using Fantabulous.Core.Entities;
+using Fantabulous.Core.Exceptions;
+using Fantabulous.Core.Models;
+using Fantabulous.Core.Requests;
 
 namespace Fantabulous.Core.Services
 {
@@ -13,61 +15,40 @@ namespace Fantabulous.Core.Services
         /// <summary>
         /// Log in a user.
         /// </summary>
-        /// <param name="username">
-        /// A username to log in as
-        /// /// </param>
-        /// <param name="password">
-        /// A password to log on with
+        /// <param name="request">
+        /// A login request
         /// </param>
         /// <returns>
-        /// The user object
+        /// The login response
         /// </returns>
         /// <exception cref="AuthenticationException">
         /// Thrown if the username or password was incorrect
         /// </exception>
-        Task<User> LoginAsync(string username, string password);
+        Task<UserAndPseud> LoginAsync(LoginRequest request);
 
         /// <summary>
         /// Creare a new user.
         /// </summary>
-        /// <param name="username">
-        /// A username for the new user
-        /// </param>
-        /// <param name="password">
-        /// A password for the new user
-        /// </param>
-        /// <param name="email">
-        /// An email address for the new user
+        /// <param name="request">
+        /// A user creation request
         /// </param>
         /// <returns>
-        /// The user object.
+        /// A login response
         /// </returns>
         /// <exception cref="AuthenticationException">
         /// Thrown if the user could not be created
         /// </exception>
-        Task<User> CreateUserAsync(
-            string username,
-            string password,
-            string email);
+        Task<UserAndPseud> CreateUserAsync(CreateUserRequest request);
 
         /// <summary>
         /// Change a user's password
         /// </summary>
-        /// <param name="id">
-        /// A user ID
-        /// </param>
-        /// <param name="oldPassword">
-        /// The user's current password
-        /// </param>
-        /// <param name="newPassword">
-        /// A new password
+        /// <param name="request">
+        /// A password change request
         /// </param>
         /// <exception cref="AuthenticationException">
         /// Thrown if the password change failed
         /// </exception>
-        Task ChangePasswordAsync(
-            long id,
-            string oldPassword,
-            string newPassword);
+        Task ChangePasswordAsync(ChangePasswordRequest request);
     }
 }

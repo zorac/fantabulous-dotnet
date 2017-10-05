@@ -22,6 +22,10 @@ namespace Fantabulous.Mysql.Repositories
         // TODO maybe lazy-initialise these?
         public IUserDao Users => new MysqlUserDao(this);
         public IPseudDao Pseuds => new MysqlPseudDao(this);
+        public ITagDao Tags => new MysqlTagDao(this);
+        public IWorkDao Works => new MysqlWorkDao(this);
+        public IChapterDao Chapters => new MysqlChapterDao(this);
+        public ISeriesDao Series => new MysqlSeriesDao(this);
 
         private readonly MySqlConnection Connection;
 

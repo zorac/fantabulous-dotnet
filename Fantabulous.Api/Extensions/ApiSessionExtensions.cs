@@ -13,6 +13,8 @@ namespace Microsoft.AspNetCore.Http
     {
         private const string USER_ID = "user_id";
         private const string USER_NAME = "user_name";
+        private const string PSEUD_ID = "pseud_id";
+        private const string PSEUD_NAME = "pseud_name";
 
         /// <summary>
         /// Add a user as logged in to this session.
@@ -20,7 +22,7 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="user">
         /// A user
         /// </param>
-        public static void Login(this ISession session, User user)
+        public static void Login(this ISession session, User user, Pseud pseud)
         {
             if (user == null)
             {
@@ -29,6 +31,8 @@ namespace Microsoft.AspNetCore.Http
 
             session.SetInt32(USER_ID, (int)user.Id);
             session.SetString(USER_NAME, user.Name);
+            session.SetInt32(PSEUD_ID, (int)pseud.Id);
+            session.SetString(PSEUD_NAME, pseud.Name);
         }
 
         /// <summary>
@@ -51,6 +55,8 @@ namespace Microsoft.AspNetCore.Http
         {
             session.Remove(USER_ID);
             session.Remove(USER_NAME);
+            session.Remove(PSEUD_ID);
+            session.Remove(PSEUD_NAME);
         }
 
         /// <summary>

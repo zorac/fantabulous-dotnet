@@ -35,6 +35,17 @@ namespace Fantabulous.Core.DataAccess
         Task<IEnumerable<Pseud>> ForIdsAsync(IEnumerable<long> ids);
 
         /// <summary>
+        /// Fetch the default pseud for a user.
+        /// </summary>
+        /// <param name="user">
+        /// A user
+        /// </param>
+        /// <returns>
+        /// The pseud record, or null if not found
+        /// </returns>
+        Task<Pseud> DefaultForUserAsync(User user);
+
+        /// <summary>
         /// Fetch a pseud record by name.
         /// </summary>
         /// <param name="userId">

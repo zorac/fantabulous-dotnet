@@ -17,10 +17,5 @@ namespace Fantabulous.Users.Options
         /// Set to true to include a SQL user service.
         /// </summary>
         public bool Sql { get; set; } = false;
-
-        /// <summary>
-        /// Set to true to include a Mock user service.
-        /// </summary>
-        public bool Mock { get; set; } = false;
     }
 }

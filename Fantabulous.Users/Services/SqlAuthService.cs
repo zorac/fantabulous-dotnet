@@ -10,7 +10,9 @@ using Newtonsoft.Json;
 using Fantabulous.Core.DataAccess;
 using Fantabulous.Core.Exceptions;
 using Fantabulous.Core.Entities;
+using Fantabulous.Core.Models;
 using Fantabulous.Core.Repositories;
+using Fantabulous.Core.Requests;
 using Fantabulous.Core.Services;
 
 namespace Fantabulous.Users.Services
@@ -43,33 +45,45 @@ namespace Fantabulous.Users.Services
 
         }
 
-        public async Task<User> LoginAsync(string username, string password)
+        public async Task<UserAndPseud> LoginAsync(LoginRequest request)
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                return await db.Users.LoginAsync(username, password);
+                var response = new UserAndPseud();
+
+                response.User = await db.Users.LoginAsync(request.Username,
+                    request.Password);
+                response.Pseud = await db.Pseuds.DefaultForUserAsync(
+                    response.User);
+
+                return response;
             }
         }
 
-        public async Task<User> CreateUserAsync(
-            string username,
-            string password,
-            string email)
+        public async Task<UserAndPseud> CreateUserAsync(
+            CreateUserRequest request)
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                return await db.Users.CreateAsync(username, password, email);
+                var response = new UserAndPseud();
+
+                await db.BeginAsync();
+                response.User = await db.Users.CreateAsync(request.Name,
+                    request.Password, request.Email);
+                response.Pseud = await db.Pseuds.CreateAsync(
+                    response.User.Id, request.Name);
+                await db.CommitAsync();
+
+                return response;
             }
         }
 
-        public async Task ChangePasswordAsync(
-            long id,
-            string oldPassword,
-            string newPassword)
+        public async Task ChangePasswordAsync(ChangePasswordRequest request)
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                await db.Users.ChangePasswordAsync(id, oldPassword, newPassword);
+                await db.Users.ChangePasswordAsync(request.UserId,
+                    request.OldPassword, request.NewPassword);
             }
         }
     }

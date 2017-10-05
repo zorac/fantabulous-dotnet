@@ -43,6 +43,12 @@ namespace Fantabulous.Mysql.DataAccess
                 new { Ids = ids });
         }
 
+        public Task<Pseud> DefaultForUserAsync(User user)
+        {
+            return ForUserAndNameAsync(user.Id, user.Name);
+            // TODO allow other defaults!
+        }
+
         public Task<Pseud> ForUserAndNameAsync(long userId, string name)
         {
             return Mysql.QueryFirstAsync<Pseud>(PseudSql.SelectByUserAndName,
@@ -53,18 +59,21 @@ namespace Fantabulous.Mysql.DataAccess
         {
             try
             {
-                var id = await Mysql.QueryFirstAsync<long>(PseudSql.Insert, new
-                    {
-                        UserId = userId,
-                        Name = name
-                    });
+                var pseud = new Pseud
+                {
+                    UserId = userId,
+                    Name = name
+                };
 
-                return new Pseud { Id = id, UserId = userId, Name = name };
+                pseud.Id = await Mysql.QueryFirstAsync<long>(PseudSql.Insert,
+                    pseud);
+
+                return pseud;
             }
             catch (Exception e)
             {
-                // TODO figure out what went wrong
-                throw new AuthenticationException("Failed to create pseud", e);
+                // TODO figure out what went wrong, not this exception
+                throw new CreateFailedException("Failed to create pseud", e);
             }
         }
     }
