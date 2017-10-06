@@ -1,4 +1,9 @@
+.docker*
 .git*
 .vs*
+Dockerfile
+LICENSE
+README.md
 */bin
 */obj
+*/README.md

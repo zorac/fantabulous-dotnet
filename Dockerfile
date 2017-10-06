@@ -7,7 +7,7 @@ COPY *.sln */*.csproj ./
 RUN perl -e 'foreach(@ARGV){/(.*).csproj/;mkdir($1);rename($&,"$1/$&")}' *.csproj
 RUN dotnet restore
 
-# Build everything
+# Copy and build everything
 COPY . .
 RUN dotnet build --no-restore -c Release
 
