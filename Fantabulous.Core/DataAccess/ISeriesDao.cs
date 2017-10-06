@@ -28,10 +28,22 @@ namespace Fantabulous.Core.DataAccess
         /// Some series IDs
         /// </param>
         /// <returns>
-        /// The series objects which were found, in no specific order, empty if
-        /// none were found
+        /// The series objects which were found, in numerical order, empty if
+        /// none found
         /// </returns>
         Task<IEnumerable<Series>> ForIdsAsync(IEnumerable<long> ids);
+
+        /// <summary>
+        /// Fetch the series IDs for a work.
+        /// </summary>
+        /// <param name="workId">
+        /// A work ID
+        /// </param>
+        /// <returns>
+        /// The IDs of the series this work is part of, in numerical order,
+        /// empty if none found
+        /// </returns>
+        Task<IEnumerable<long>> IdsForWorkAsync(long workId);
 
         /// <summary>
         /// Create a new series.

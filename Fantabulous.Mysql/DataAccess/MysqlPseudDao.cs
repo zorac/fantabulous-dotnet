@@ -55,6 +55,18 @@ namespace Fantabulous.Mysql.DataAccess
                 new { UserId = userId, Name = name });
         }
 
+        public Task<IEnumerable<long>> IdsForUserAsync(long userId)
+        {
+            return Mysql.QueryAsync<long>(PseudSql.SelectIdsByUser,
+                new { UserId = userId });
+        }
+
+        public Task<IEnumerable<long>> IdsForWorkAsync(long workId)
+        {
+            return Mysql.QueryAsync<long>(PseudSql.SelectIdsByWork,
+                new { WorkId = workId });
+        }
+
         public async Task<Pseud> CreateAsync(long userId, string name)
         {
             try

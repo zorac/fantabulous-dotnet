@@ -5,6 +5,8 @@ namespace Fantabulous.Mysql.Constants
     /// </summary>
     internal static class CommonSql
     {
-        internal const string SelectLastInsertId = @"SELECT LAST_INSERT_ID();";
+        internal const string SelectLastInsertId = @"
+            SELECT LAST_INSERT_ID()
+        ;";
     }
 }

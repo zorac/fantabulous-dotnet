@@ -9,12 +9,27 @@ using Fantabulous.Core.Services;
 
 namespace Fantabulous.Users.Services
 {
+    /// <summary>
+    /// A pseudonym service providing an intermediate cache.
+    /// </summary>
     public class CachePseudService : IPseudService
     {
         private readonly IIdCache<Pseud> Cache;
         private readonly IPseudService Service;
         private readonly ILogger Logger;
 
+        /// <summary>
+        /// Create a new pseudonym cache service.
+        /// </summary>
+        /// <param name="cache">
+        /// A cache where data will be stored
+        /// </param>
+        /// <param name="upstreamService">
+        /// An upstream service to resolve cache misses
+        /// </param>
+        /// <param name="logger">
+        /// A logger for this service
+        /// </param>
         public CachePseudService(
             IIdCache<Pseud> cache,
             IPseudService upstreamService,
@@ -51,7 +66,7 @@ namespace Fantabulous.Users.Services
             return Service.GetPseudJsonAsync(userId, name); // TODO cache?
         }
 
-        public Task<IEnumerable<string>> GetPseudsJsonAsync(IEnumerable<long> ids)
+        public Task<IEnumerable<string>> GetPseudJsonsAsync(IEnumerable<long> ids)
         {
             return Cache.GetJsonAsync(ids, Service.GetPseudsAsync);
         }

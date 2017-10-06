@@ -85,7 +85,7 @@ namespace Fantabulous.Users.Services
             }
         }
 
-        public async Task<IEnumerable<string>> GetPseudsJsonAsync(
+        public async Task<IEnumerable<string>> GetPseudJsonsAsync(
             IEnumerable<long> ids)
         {
             using (var db = await Repository.GetDatabaseAsync())

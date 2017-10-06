@@ -39,6 +39,10 @@ namespace Fantabulous.Api
             services.AddAuthServices(Configuration);
             services.AddUserServices(Configuration);
             services.AddPseudServices(Configuration);
+            services.AddTagServices(Configuration);
+            services.AddWorkServices(Configuration);
+            services.AddChapterServices(Configuration);
+            services.AddSeriesServices(Configuration);
         }
 
         /// <summary>

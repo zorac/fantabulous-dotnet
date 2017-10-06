@@ -28,10 +28,22 @@ namespace Fantabulous.Core.DataAccess
         /// Some chapter IDs
         /// </param>
         /// <returns>
-        /// The chapter objects which were found, in no specific order, empty if
+        /// The chapter objects which were found, in numerical order, empty if
         /// none were found
         /// </returns>
         Task<IEnumerable<Chapter>> ForIdsAsync(IEnumerable<long> ids);
+
+        /// <summary>
+        /// Fetch the chapter IDs for a work.
+        /// </summary>
+        /// <param name="workId">
+        /// A work ID
+        /// </param>
+        /// <returns>
+        /// The IDs of the work's chapters, ordered by position, empty if none
+        /// found
+        /// </returns>
+        Task<IEnumerable<long>> IdsForWorkAsync(long workId);
 
         /// <summary>
         /// Create a new chapter.

@@ -29,7 +29,7 @@ namespace Fantabulous.Core.DataAccess
         /// Some pseud IDs
         /// </param>
         /// <returns>
-        /// The pseud objects which were found, in no specific order, empty if
+        /// The pseud objects which were found, in numerical order, empty if
         /// none were found
         /// </returns>
         Task<IEnumerable<Pseud>> ForIdsAsync(IEnumerable<long> ids);
@@ -46,7 +46,7 @@ namespace Fantabulous.Core.DataAccess
         Task<Pseud> DefaultForUserAsync(User user);
 
         /// <summary>
-        /// Fetch a pseud record by name.
+        /// Fetch a pseud record by user and name.
         /// </summary>
         /// <param name="userId">
         /// A user ID
@@ -58,6 +58,29 @@ namespace Fantabulous.Core.DataAccess
         /// The pseud record, or null if none found
         /// </returns>
         Task<Pseud> ForUserAndNameAsync(long userId, string name);
+
+        /// <summary>
+        /// Fetch all the pseud IDs for a user.
+        /// </summary>
+        /// <param name="userId">
+        /// A user ID
+        /// </param>
+        /// <returns>
+        /// The pseud IDs for that user, ordered by name, empty if none found
+        /// </returns>
+        Task<IEnumerable<long>> IdsForUserAsync(long userId);
+
+        /// <summary>
+        /// Fetch the pseud IDs which are the creators of a work.
+        /// </summary>
+        /// <param name="workId">
+        /// A work ID
+        /// </param>
+        /// <returns>
+        /// The pseud IDs which are creators of the work, ordered by position,
+        /// empty if none found
+        /// </returns>
+        Task<IEnumerable<long>> IdsForWorkAsync(long workId);
 
         /// <summary>
         /// Create a new pseudonym.

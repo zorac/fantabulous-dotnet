@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fantabulous.Cache\Fantabulous.Cache.csproj" />
+    <ProjectReference Include="..\Fantabulous.Core\Fantabulous.Core.csproj" />
+    <ProjectReference Include="..\Fantabulous.Mysql\Fantabulous.Mysql.csproj" />
+    <ProjectReference Include="..\Fantabulous.Redis\Fantabulous.Redis.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+    <PackageReference Include="Scrutor" Version="2.1.2" />
+  </ItemGroup>
+
+</Project>

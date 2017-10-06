@@ -44,6 +44,12 @@ namespace Fantabulous.Mysql.DataAccess
                 new { Ids = ids });
         }
 
+        public Task<IEnumerable<long>> IdsForSeriesAsync(long seriesId)
+        {
+            return Mysql.QueryAsync<long>(WorkSql.SelectIdsBySeries,
+                new { SeriesId = seriesId });
+        }
+
         public async Task<Work> CreateAsync(string name)
         {
             try

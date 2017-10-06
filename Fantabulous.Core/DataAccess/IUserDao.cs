@@ -29,7 +29,7 @@ namespace Fantabulous.Core.DataAccess
         /// Some user IDs
         /// </param>
         /// <returns>
-        /// The user objects which were found, in no specific order, empty if
+        /// The user objects which were found, in numerical order, empty if
         /// none were found
         /// </returns>
         Task<IEnumerable<User>> ForIdsAsync(IEnumerable<long> ids);

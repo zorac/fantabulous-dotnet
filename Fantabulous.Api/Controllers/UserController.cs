@@ -41,7 +41,7 @@ namespace Fantabulous.Api.Controllers
         [HttpGet("ids/{ids}")]
         public async Task<ActionResult> GetByIds(string ids)
         {
-            return PreJson(await Service.GetUsersJsonAsync(ParseIds(ids)));
+            return PreJson(await Service.GetUserJsonsAsync(ParseIds(ids)));
         }
     }
 }

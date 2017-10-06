@@ -85,7 +85,7 @@ namespace Fantabulous.Users.Services
             }
         }
 
-        public async Task<IEnumerable<string>> GetUsersJsonAsync(
+        public async Task<IEnumerable<string>> GetUserJsonsAsync(
             IEnumerable<long> ids)
         {
             using (var db = await Repository.GetDatabaseAsync())

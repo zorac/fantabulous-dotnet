@@ -72,8 +72,8 @@ namespace Fantabulous.Core.Services
         /// Some user IDs
         /// </param>
         /// <returns>
-        /// JSONS of the users which were found, empty if none
+        /// JSONs of the users which were found, empty if none
         /// </returns>
-        Task<IEnumerable<string>> GetUsersJsonAsync(IEnumerable<long> ids);
+        Task<IEnumerable<string>> GetUserJsonsAsync(IEnumerable<long> ids);
     }
 }

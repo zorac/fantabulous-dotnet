@@ -29,10 +29,22 @@ namespace Fantabulous.Core.DataAccess
         /// Some tag IDs
         /// </param>
         /// <returns>
-        /// The tag objects which were found, in no specific order, empty if
+        /// The tag objects which were found, in numerical order, empty if
         /// none were found
         /// </returns>
         Task<IEnumerable<Tag>> ForIdsAsync(IEnumerable<long> ids);
+
+        /// <summary>
+        /// Fetch the tag IDs for a work.
+        /// </summary>
+        /// <param name="workId">
+        /// A work ID
+        /// </param>
+        /// <returns>
+        /// The IDs of the tags attached to the work, ordered by position,
+        /// empty if none found
+        /// </returns>
+        Task<IEnumerable<long>> IdsForWorkAsync(long workId);
 
         /// <summary>
         /// Create a new tag.

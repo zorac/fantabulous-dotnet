@@ -6,19 +6,30 @@ namespace Fantabulous.Mysql.Constants
     internal static class WorkSql
     {
         private const string Select = @"
-            SELECT  id          AS Id,
-                    name        AS Name
-            FROM    works";
+            SELECT      id      AS Id,
+                        name    AS Name
+            FROM        works
+        ";
 
         internal const string SelectById = Select + @"
-            WHERE   id = @Id;";
+            WHERE       id = @Id
+        ;";
 
         internal const string SelectByIds = Select + @"
-            WHERE   id IN @Ids;";
+            WHERE       id IN @Ids
+            ORDER BY    id
+        ;";
+
+        internal const string SelectIdsBySeries = Select + @"
+            SELECT      work_id
+            FROM        series_works
+            WHERE       series_id = @SeriesId
+            ORDER BY    position
+        ;";
 
         internal const string Insert = @"
             INSERT INTO works
-            SET         name = @Name;
-            " + CommonSql.SelectLastInsertId;
+            SET         name = @Name
+        ;" + CommonSql.SelectLastInsertId;
     }
 }

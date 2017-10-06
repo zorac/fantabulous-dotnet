@@ -78,8 +78,8 @@ namespace Fantabulous.Core.Services
         /// Some pseud IDs
         /// </param>
         /// <returns>
-        /// JSONS of the pseuds which were found, empty if none
+        /// JSONs of the pseuds which were found, empty if none
         /// </returns>
-        Task<IEnumerable<string>> GetPseudsJsonAsync(IEnumerable<long> ids);
+        Task<IEnumerable<string>> GetPseudJsonsAsync(IEnumerable<long> ids);
     }
 }
