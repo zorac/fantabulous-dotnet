@@ -12,6 +12,7 @@ namespace Fantabulous.Works.Services
     /// <summary>
     /// A chapter service providing an intermediate cache.
     /// </summary>
+    /// <inhertitDoc/>
     public class CacheChapterService : IChapterService
     {
         private readonly IIdCache<Chapter> Cache;

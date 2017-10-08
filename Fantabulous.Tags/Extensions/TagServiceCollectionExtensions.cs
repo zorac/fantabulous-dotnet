@@ -1,5 +1,3 @@
-using System;
-
 using Microsoft.Extensions.Configuration;
 
 using Fantabulous.Core.Exceptions;
@@ -10,7 +8,8 @@ using Fantabulous.Redis.Repositories;
 using Fantabulous.Tags.Options;
 using Fantabulous.Tags.Services;
 
-namespace Microsoft.Extensions.DependencyInjection {
+namespace Microsoft.Extensions.DependencyInjection
+{
     /// <summary>
     /// ServiceCollection extensions for tag-related services.
     /// </summary>
@@ -43,7 +42,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             {
                 options.Redis.Validate("Tags");
                 services.AddSingleton(options.Redis);
-                services.AddSingleton<IIdNameCache<Tag>,RedisIdNameCache<Tag>>();
+                services.AddSingleton<IIdCache<Tag>,RedisIdCache<Tag>>();
                 services.Decorate<ITagService,CacheTagService>();
             }
         }

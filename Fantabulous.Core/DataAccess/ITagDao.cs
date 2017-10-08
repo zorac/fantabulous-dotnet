@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Fantabulous.Core.Entities;
+using Fantabulous.Core.Models;
 using Fantabulous.Core.Types;
 
 namespace Fantabulous.Core.DataAccess
@@ -29,7 +30,7 @@ namespace Fantabulous.Core.DataAccess
         /// Some tag IDs
         /// </param>
         /// <returns>
-        /// The tag objects which were found, in numerical order, empty if
+        /// The tag objects which were found, in numerical order; empty if
         /// none were found
         /// </returns>
         Task<IEnumerable<Tag>> ForIdsAsync(IEnumerable<long> ids);
@@ -41,10 +42,48 @@ namespace Fantabulous.Core.DataAccess
         /// A work ID
         /// </param>
         /// <returns>
-        /// The IDs of the tags attached to the work, ordered by position,
+        /// The IDs of the tags attached to the work, ordered by position;
         /// empty if none found
         /// </returns>
-        Task<IEnumerable<long>> IdsForWorkAsync(long workId);
+        Task<IEnumerable<long>> IdsForWorkIdAsync(long workId);
+
+        /// <summary>
+        /// Fetch the tag IDs for multiple works.
+        /// </summary>
+        /// <param name="workIds">
+        /// Some work IDs
+        /// </param>
+        /// <returns>
+        /// The IDs of the works and tags, ordered by work ID and position;
+        /// empty if none found
+        /// </returns>
+        Task<IEnumerable<IdPair<Work,Tag>>> IdsForWorkIdsAsync(
+            IEnumerable<long> workIds);
+
+        /// <summary>
+        /// Fetch the tag IDs for a series.
+        /// </summary>
+        /// <param name="seriesId">
+        /// A series ID
+        /// </param>
+        /// <returns>
+        /// The IDs of the tags attached to the works in the series, ordered by
+        /// type, frequency and first appearance; empty if none found
+        /// </returns>
+        Task<IEnumerable<long>> IdsForSeriesIdAsync(long seriesId);
+
+        /// <summary>
+        /// Fetch the tag IDs for multiple series.
+        /// </summary>
+        /// <param name="seriesIds">
+        /// Some series IDs
+        /// </param>
+        /// <returns>
+        /// The IDs of the series and tags, ordered by series ID and position;
+        /// empty if none found
+        /// </returns>
+        Task<IEnumerable<IdPair<Series,Tag>>> IdsForSeriesIdsAsync(
+            IEnumerable<long> seriesIds);
 
         /// <summary>
         /// Create a new tag.

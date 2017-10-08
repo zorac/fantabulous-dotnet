@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Fantabulous.Core.DataAccess;
 using Fantabulous.Core.Entities;
 using Fantabulous.Core.Exceptions;
+using Fantabulous.Core.Models;
 using Fantabulous.Core.Types;
 using Fantabulous.Mysql.Constants;
 using Fantabulous.Mysql.Repositories;
@@ -44,10 +45,30 @@ namespace Fantabulous.Mysql.DataAccess
                 new { Ids = ids });
         }
 
-        public Task<IEnumerable<long>> IdsForWorkAsync(long workId)
+        public Task<IEnumerable<long>> IdsForWorkIdAsync(long workId)
         {
-            return Mysql.QueryAsync<long>(TagSql.SelectIdsByWork,
+            return Mysql.QueryAsync<long>(TagSql.SelectIdsByWorkId,
                 new { WorkId = workId });
+        }
+
+        public Task<IEnumerable<IdPair<Work,Tag>>> IdsForWorkIdsAsync(
+            IEnumerable<long> workIds)
+        {
+            return Mysql.QueryAsync<IdPair<Work,Tag>>(TagSql.SelectIdsByWorkIds,
+                new { WorkIds = workIds });
+        }
+
+        public Task<IEnumerable<long>> IdsForSeriesIdAsync(long seriesId)
+        {
+            return Mysql.QueryAsync<long>(TagSql.SelectIdsBySeriesId,
+                new { SeriesId = seriesId });
+        }
+
+        public Task<IEnumerable<IdPair<Series,Tag>>> IdsForSeriesIdsAsync(
+            IEnumerable<long> seriesIds)
+        {
+            return Mysql.QueryAsync<IdPair<Series,Tag>>(
+                TagSql.SelectIdsBySeriesIds, new { SeriesIds = seriesIds });
         }
 
         public async Task<Tag> CreateAsync(

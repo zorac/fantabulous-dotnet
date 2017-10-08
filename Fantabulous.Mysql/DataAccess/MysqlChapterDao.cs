@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Threading.Tasks;
 
 using Fantabulous.Core.DataAccess;
 using Fantabulous.Core.Entities;
 using Fantabulous.Core.Exceptions;
-using Fantabulous.Core.Types;
+using Fantabulous.Core.Models;
 using Fantabulous.Mysql.Constants;
 using Fantabulous.Mysql.Repositories;
 
@@ -44,10 +43,17 @@ namespace Fantabulous.Mysql.DataAccess
                 new { Ids = ids });
         }
 
-        public Task<IEnumerable<long>> IdsForWorkAsync(long workId)
+        public Task<IEnumerable<long>> IdsForWorkIdAsync(long workId)
         {
-            return Mysql.QueryAsync<long>(ChapterSql.SelectIdsByWork,
+            return Mysql.QueryAsync<long>(ChapterSql.SelectIdsByWorkId,
                 new { WorkId = workId });
+        }
+
+        public Task<IEnumerable<IdPair<Work,Chapter>>> IdsForWorkIdsAsync(
+            IEnumerable<long> workIds)
+        {
+            return Mysql.QueryAsync<IdPair<Work,Chapter>>(
+                ChapterSql.SelectIdsByWorkIds, new { WorkIds = workIds });
         }
 
         public async Task<Chapter> CreateAsync(

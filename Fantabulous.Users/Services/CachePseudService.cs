@@ -12,6 +12,7 @@ namespace Fantabulous.Users.Services
     /// <summary>
     /// A pseudonym service providing an intermediate cache.
     /// </summary>
+    /// <inheritDoc/>
     public class CachePseudService : IPseudService
     {
         private readonly IIdCache<Pseud> Cache;

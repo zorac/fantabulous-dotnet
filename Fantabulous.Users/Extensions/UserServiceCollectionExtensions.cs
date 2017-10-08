@@ -1,5 +1,3 @@
-using System;
-
 using Microsoft.Extensions.Configuration;
 
 using Fantabulous.Core.Exceptions;
@@ -10,7 +8,8 @@ using Fantabulous.Redis.Repositories;
 using Fantabulous.Users.Options;
 using Fantabulous.Users.Services;
 
-namespace Microsoft.Extensions.DependencyInjection {
+namespace Microsoft.Extensions.DependencyInjection
+{
     /// <summary>
     /// ServiceCollection extensions dor user/authentication services.
     /// </summary>

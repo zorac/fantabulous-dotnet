@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Fantabulous.Core.Entities;
+using Fantabulous.Core.Models;
 
 namespace Fantabulous.Core.DataAccess
 {
@@ -28,7 +29,7 @@ namespace Fantabulous.Core.DataAccess
         /// Some chapter IDs
         /// </param>
         /// <returns>
-        /// The chapter objects which were found, in numerical order, empty if
+        /// The chapter objects which were found, in numerical order; empty if
         /// none were found
         /// </returns>
         Task<IEnumerable<Chapter>> ForIdsAsync(IEnumerable<long> ids);
@@ -40,10 +41,23 @@ namespace Fantabulous.Core.DataAccess
         /// A work ID
         /// </param>
         /// <returns>
-        /// The IDs of the work's chapters, ordered by position, empty if none
+        /// The IDs of the work's chapters, ordered by position; empty if none
         /// found
         /// </returns>
-        Task<IEnumerable<long>> IdsForWorkAsync(long workId);
+        Task<IEnumerable<long>> IdsForWorkIdAsync(long workId);
+
+        /// <summary>
+        /// Fetch the chapter IDs for multiple works.
+        /// </summary>
+        /// <param name="workIds">
+        /// Some work IDs
+        /// </param>
+        /// <returns>
+        /// The IDs of the works' chapters, ordered by work ID and position;
+        /// empty if none found
+        /// </returns>
+        Task<IEnumerable<IdPair<Work,Chapter>>> IdsForWorkIdsAsync(
+            IEnumerable<long> workIds);
 
         /// <summary>
         /// Create a new chapter.

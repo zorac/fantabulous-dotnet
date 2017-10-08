@@ -12,6 +12,7 @@ namespace Fantabulous.Works.Services
     /// <summary>
     /// A series service providing an intermediate cache.
     /// </summary>
+    /// <inheritDoc/>
     public class CacheSeriesService : ISeriesService
     {
         private readonly IIdCache<Series> Cache;

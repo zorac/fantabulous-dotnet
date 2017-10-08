@@ -12,6 +12,7 @@ namespace Fantabulous.Works.Services
     /// <summary>
     /// A work service providing an intermediate cache.
     /// </summary>
+    /// <inheritDoc/>
     public class CacheWorkService : IWorkService
     {
         private readonly IIdCache<Work> Cache;

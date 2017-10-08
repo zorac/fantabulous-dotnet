@@ -20,11 +20,20 @@ namespace Fantabulous.Mysql.Constants
             ORDER BY    id
         ;";
 
-        internal const string SelectIdsByWork = @"
+        internal const string SelectIdsByWorkId = @"
             SELECT      series_id
             FROM        series_works
             WHERE       work_id = @WorkId
             ORDER BY    series_id
+        ;";
+
+        internal const string SelectIdsByWorkIds = @"
+            SELECT      work_id     AS ParentId,
+                        series_id   AS ChildId
+            FROM        series_works
+            WHERE       work_id IN @WorkIds
+            ORDER BY    work_id,
+                        series_id
         ;";
 
         internal const string Insert = @"

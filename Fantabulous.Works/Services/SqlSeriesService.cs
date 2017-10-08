@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,9 +6,8 @@ using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
 
-using Fantabulous.Core.DataAccess;
-using Fantabulous.Core.Exceptions;
 using Fantabulous.Core.Entities;
+using Fantabulous.Core.Models;
 using Fantabulous.Core.Repositories;
 using Fantabulous.Core.Services;
 
@@ -46,7 +44,12 @@ namespace Fantabulous.Works.Services
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                return await db.Series.ForIdAsync(id);
+                var series = await db.Series.ForIdAsync(id);
+
+                series.WorkIds = (await db.Works.IdsForSeriesIdAsync(id))
+                    .ToArray();
+
+                return series;
             }
         }
 
@@ -55,27 +58,33 @@ namespace Fantabulous.Works.Services
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                return await db.Series.ForIdsAsync(ids);
+                var series = await db.Series.ForIdsAsync(ids);
+                var works = new IdPairReader<Series,Work>(
+                    await db.Works.IdsForSeriesIdsAsync(ids));
+
+                return series.Select(s => AddArrays(s, works));
             }
+        }
+
+        private Series AddArrays(
+            Series series,
+            IdPairReader<Series,Work> works)
+        {
+            series.WorkIds = works.GetChildIdsForParentId(series.Id);
+
+            return series;
         }
 
         public async Task<string> GetSeriesJsonAsync(long id)
         {
-            using (var db = await Repository.GetDatabaseAsync())
-            {
-                return JsonConvert.SerializeObject(
-                    await db.Series.ForIdAsync(id));
-            }
+            return JsonConvert.SerializeObject(await GetSeriesAsync(id));
         }
 
         public async Task<IEnumerable<string>> GetSeriesJsonsAsync(
             IEnumerable<long> ids)
         {
-            using (var db = await Repository.GetDatabaseAsync())
-            {
-                return (await db.Series.ForIdsAsync(ids))
-                    .Select(u => JsonConvert.SerializeObject(u));
-            }
+            return (await GetSeriesAsync(ids))
+                .Select(u => JsonConvert.SerializeObject(u));
         }
     }
 }

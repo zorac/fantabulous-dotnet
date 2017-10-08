@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Fantabulous.Core.Entities;
+using Fantabulous.Core.Models;
 
 namespace Fantabulous.Core.DataAccess
 {
@@ -28,7 +29,7 @@ namespace Fantabulous.Core.DataAccess
         /// Some series IDs
         /// </param>
         /// <returns>
-        /// The series objects which were found, in numerical order, empty if
+        /// The series objects which were found, in numerical order; empty if
         /// none found
         /// </returns>
         Task<IEnumerable<Series>> ForIdsAsync(IEnumerable<long> ids);
@@ -40,10 +41,23 @@ namespace Fantabulous.Core.DataAccess
         /// A work ID
         /// </param>
         /// <returns>
-        /// The IDs of the series this work is part of, in numerical order,
+        /// The IDs of the series this work is part of, in numerical order;
         /// empty if none found
         /// </returns>
-        Task<IEnumerable<long>> IdsForWorkAsync(long workId);
+        Task<IEnumerable<long>> IdsForWorkIdAsync(long workId);
+
+        /// <summary>
+        /// Fetch the series IDs for multiple works.
+        /// </summary>
+        /// <param name="workIds">
+        /// Some work IDs
+        /// </param>
+        /// <returns>
+        /// The IDs of the series those works are part of, in numerical order
+        /// of work and series ID; empty if none found
+        /// </returns>
+        Task<IEnumerable<IdPair<Work,Series>>> IdsForWorkIdsAsync(
+            IEnumerable<long> workIds);
 
         /// <summary>
         /// Create a new series.

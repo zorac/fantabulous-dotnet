@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,9 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
-
-using Fantabulous.Core.DataAccess;
-using Fantabulous.Core.Exceptions;
 using Fantabulous.Core.Entities;
 using Fantabulous.Core.Repositories;
 using Fantabulous.Core.Services;
@@ -54,7 +50,7 @@ namespace Fantabulous.Users.Services
         {
             using (var db = await Repository.GetDatabaseAsync())
             {
-                return await db.Pseuds.ForUserAndNameAsync(userId, name);
+                return await db.Pseuds.ForUserIdAndNameAsync(userId, name);
             }
         }
 
@@ -81,7 +77,7 @@ namespace Fantabulous.Users.Services
             using (var db = await Repository.GetDatabaseAsync())
             {
                 return JsonConvert.SerializeObject(
-                    await db.Pseuds.ForUserAndNameAsync(userId, name));
+                    await db.Pseuds.ForUserIdAndNameAsync(userId, name));
             }
         }
 

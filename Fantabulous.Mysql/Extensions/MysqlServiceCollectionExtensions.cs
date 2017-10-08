@@ -1,14 +1,10 @@
-using System;
-
 using Microsoft.Extensions.Configuration;
-
-using Fantabulous.Core.Entities;
 using Fantabulous.Core.Repositories;
-using Fantabulous.Core.Services;
 using Fantabulous.Mysql.Options;
 using Fantabulous.Mysql.Repositories;
 
-namespace Microsoft.Extensions.DependencyInjection {
+namespace Microsoft.Extensions.DependencyInjection
+{
     /// <summary>
     /// ServiceCollection extensions for a MySQL repository.
     /// </summary>

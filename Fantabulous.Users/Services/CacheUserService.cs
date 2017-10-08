@@ -12,6 +12,7 @@ namespace Fantabulous.Users.Services
     /// <summary>
     /// A user service providing an intermediate cache.
     /// </summary>
+    /// <inheritDoc/>
     public class CacheUserService : IUserService
     {
         private readonly IIdNameCache<User> Cache;

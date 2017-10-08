@@ -1,5 +1,3 @@
-using System;
-
 using Microsoft.Extensions.Configuration;
 
 using Fantabulous.Core.Exceptions;
@@ -10,7 +8,8 @@ using Fantabulous.Redis.Repositories;
 using Fantabulous.Works.Options;
 using Fantabulous.Works.Services;
 
-namespace Microsoft.Extensions.DependencyInjection {
+namespace Microsoft.Extensions.DependencyInjection
+{
     /// <summary>
     /// ServiceCollection extensions for work-related services.
     /// </summary>
@@ -43,7 +42,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             {
                 options.Redis.Validate("Works");
                 services.AddSingleton(options.Redis);
-                services.AddSingleton<IIdNameCache<Work>,RedisIdNameCache<Work>>();
+                services.AddSingleton<IIdCache<Work>,RedisIdCache<Work>>();
                 services.Decorate<IWorkService,CacheWorkService>();
             }
         }
@@ -107,7 +106,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             {
                 options.Redis.Validate("Series");
                 services.AddSingleton(options.Redis);
-                services.AddSingleton<IIdNameCache<Series>,RedisIdNameCache<Series>>();
+                services.AddSingleton<IIdCache<Series>,RedisIdCache<Series>>();
                 services.Decorate<ISeriesService,CacheSeriesService>();
             }
         }
