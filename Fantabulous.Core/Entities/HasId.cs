@@ -3,7 +3,7 @@ namespace Fantabulous.Core.Entities
     /// <summary>
     /// Abstract class for an entity which has a unique ID.
     /// </summary>
-    public abstract class HasId
+    public abstract class HasId : Entity
     {
         /// <summary>
         /// The unique ID of this entity
