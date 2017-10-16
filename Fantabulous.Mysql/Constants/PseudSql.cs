@@ -34,12 +34,11 @@ namespace Fantabulous.Mysql.Constants
         ;";
 
         internal const string SelectIdsByUserIds = @"
-            SELECT      user_id AS UserId,
-                        id      AS PseudId
+            SELECT      user_id                         AS ParentId,
+                        GROUP_CONCAT(id ORDER BY name)  AS PseudId
             FROM        pseuds
             WHERE       user_id IN @UserIds
-            ORDER BY    user_id,
-                        name
+            GROUP BY    user_id
         ;";
 
         internal const string SelectIdsByWorkId = @"
@@ -50,39 +49,43 @@ namespace Fantabulous.Mysql.Constants
         ;";
 
         internal const string SelectIdsByWorkIds = @"
-            SELECT      work_id     AS ParentId,
-                        pseud_id    AS ChildId
+            SELECT      work_id                                     AS ParentId,
+                        GROUP_CONCAT(pseud_id ORDER BY position)    AS ChildIdString
             FROM        work_pseuds
             WHERE       work_id IN @WorkIds
-            ORDER BY    work_id,
-                        position
+            GROUP BY    work_id
         ;";
 
         internal const string SelectIdsBySeriesId = @"
-            SELECT      work_pseuds.pseud_id
+            SELECT      pseud_id
             FROM        work_pseuds
             INNER JOIN  series_works
               ON        series_works.work_id = work_pseuds.work_id
-            WHERE       series_works.series_id = @SeriesId
-            GROUP BY    work_pseuds.pseud_id
+            WHERE       series_id = @SeriesId
+            GROUP BY    pseud_id
             ORDER BY    COUNT(*) DESC,
                         MIN(series_works.position),
                         MIN(work_pseuds.position)
         ;";
 
         internal const string SelectIdsBySeriesIds = @"
-            SELECT      series_works.series_id  AS ParentId,
-                        work_pseuds.pseud_id    AS ChildId
-            FROM        work_pseuds
-            INNER JOIN  series_works
-              ON        series_works.work_id = work_pseuds.work_id
-            WHERE       series_works.series_id IN (1,2,3,4,5)
-            GROUP BY    series_works.series_id,
-                        work_pseuds.pseud_id
-            ORDER BY    series_works.series_id,
-                        COUNT(*) DESC,
-                        MIN(series_works.position),
-                        MIN(work_pseuds.position)
+            SELECT      series_id               AS ParentId,
+                        GROUP_CONCAT(pseud_id)  AS ChildIdString
+            FROM        (
+                SELECT      series_id,
+                            pseud_id
+                FROM        work_pseuds
+                INNER JOIN  series_works
+                  ON        series_works.work_id = work_pseuds.work_id
+                WHERE       series_id IN @SeriesIds
+                GROUP BY    series_id,
+                            pseud_id
+                ORDER BY    series_id,
+                            COUNT(*) DESC,
+                            MIN(series_works.position),
+                            MIN(work_pseuds.position)
+                        ) AS series_pseuds
+            GROUP BY    series_id
         ;";
 
         internal const string Insert = @"

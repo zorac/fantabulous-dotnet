@@ -59,20 +59,13 @@ namespace Fantabulous.Works.Services
             using (var db = await Repository.GetDatabaseAsync())
             {
                 var series = await db.Series.ForIdsAsync(ids);
-                var works = new IdPairReader<Series,Work>(
-                    await db.Works.IdsForSeriesIdsAsync(ids));
+                var works = (await db.Works.IdsForSeriesIdsAsync(ids)).GetReader();
 
-                return series.Select(s => AddArrays(s, works));
+                return series.Select(s => {
+                    s.WorkIds = works.Get(s.Id);
+                    return s;
+                });
             }
-        }
-
-        private Series AddArrays(
-            Series series,
-            IdPairReader<Series,Work> works)
-        {
-            series.WorkIds = works.GetChildIdsForParentId(series.Id);
-
-            return series;
         }
 
         public async Task<string> GetSeriesJsonAsync(long id)

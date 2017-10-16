@@ -22,53 +22,75 @@ namespace Fantabulous.Mysql.Constants
             ORDER BY    id
         ;";
 
-        internal const string SelectIdsByWorkId = @"
-            SELECT      tag_id
+        internal const string SelectTypesAndIdsByWorkId = @"
+            SELECT      type                                AS Type,
+                        GROUP_CONCAT(id ORDER BY position)  AS ChildIdString
             FROM        work_tags
+            INNER JOIN  tags
+              ON        id = tag_id
             WHERE       work_id = @WorkId
-            ORDER BY    position
+            GROUP BY    type
         ;";
 
-        internal const string SelectIdsByWorkIds = @"
-            SELECT      work_id AS ParentId,
-                        tag_id  AS ChildId
+        internal const string SelectTypesAndIdsByWorkIds = @"
+            SELECT      work_id                             AS ParentId,
+                        type                                AS Type,
+                        GROUP_CONCAT(id ORDER BY position)  AS ChildIdString
             FROM        work_tags
+            INNER JOIN  tags
+              ON        id = tag_id
             WHERE       work_id IN @WorkIds
-            ORDER BY    work_id,
-                        position
+            GROUP BY    work_id,
+                        type
         ;";
 
-        internal const string SelectIdsBySeriesId = @"
-            SELECT      tags.id
-            FROM        tags
-            INNER JOIN  work_tags
-              ON        work_tags.tag_id = tags.id
-            INNER JOIN  series_works
-              ON        series_works.work_id = work_tags.work_id
-            WHERE       series_works.series_id = @SeriesId
-            GROUP BY    tags.id
-            ORDER BY    tags.type,
-                        COUNT(*) DESC,
-                        MIN(series_works.position),
-                        MIN(work_tags.position)
-        ;";
+        internal const string SelectTypesAndIdsBySeriesId = @"
+            SELECT      type                AS Type,
+                        GROUP_CONCAT(id)    AS ChildIdString
+            FROM        (
+                SELECT      type,
+                            id
+                FROM        tags
+                INNER JOIN  work_tags
+                    ON      tag_id = tags.id
+                INNER JOIN  series_works
+                    ON      series_works.work_id = work_tags.work_id
+                WHERE       series_id = @SeriesId
+                GROUP BY    tags.type,
+                            tags.id
+                ORDER BY    tags.type,
+                            COUNT(*) DESC,
+                            MIN(series_works.position),
+                            MIN(work_tags.position)
+                        ) AS type_ids
+            GROUP BY    type
+          ;";
 
-        internal const string SelectIdsBySeriesIds = @"
-            SELECT      series_works.series_id  AS ParentId,
-                        tags.id                 AS ChildId
-            FROM        tags
-            INNER JOIN  work_tags
-              ON        work_tags.tag_id = tags.id
-            INNER JOIN  series_works
-              ON        series_works.work_id = work_tags.work_id
-            WHERE       series_works.series_id IN @SeriesIds
-            GROUP BY    series_works.series_id,
-                        tags.id
-            ORDER BY    series_works.series_id,
-                        tags.type,
-                        COUNT(*) DESC,
-                        MIN(series_works.position),
-                        MIN(work_tags.position)
+        internal const string SelectTypesAndIdsBySeriesIds = @"
+            SELECT      series_id           AS ParentId,
+                        type                AS Type,
+                        GROUP_CONCAT(id)    AS ChildIdString
+            FROM        (
+                SELECT      series_id,
+                            type,
+                            id
+                FROM        tags
+                INNER JOIN  work_tags
+                  ON        tag_id = tags.id
+                INNER JOIN  series_works
+                  ON        series_works.work_id = work_tags.work_id
+                WHERE       series_id IN @SeriesIds
+                GROUP BY    series_id,
+                            type,
+                            id
+                ORDER BY    series_id,
+                            type,
+                            COUNT(*) DESC,
+                            MIN(series_works.position),
+                            MIN(work_tags.position)
+                        ) AS series_type_ids
+            GROUP BY    series_id,
+                        type
         ;";
 
         internal const string Insert = @"

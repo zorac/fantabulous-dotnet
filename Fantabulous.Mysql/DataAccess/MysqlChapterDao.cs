@@ -49,10 +49,10 @@ namespace Fantabulous.Mysql.DataAccess
                 new { WorkId = workId });
         }
 
-        public Task<IEnumerable<IdPair<Work,Chapter>>> IdsForWorkIdsAsync(
+        public Task<IEnumerable<ParentChildren<Work,Chapter>>> IdsForWorkIdsAsync(
             IEnumerable<long> workIds)
         {
-            return Mysql.QueryAsync<IdPair<Work,Chapter>>(
+            return Mysql.QueryAsync<ParentChildren<Work,Chapter>>(
                 ChapterSql.SelectIdsByWorkIds, new { WorkIds = workIds });
         }
 

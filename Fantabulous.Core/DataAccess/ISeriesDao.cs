@@ -56,7 +56,7 @@ namespace Fantabulous.Core.DataAccess
         /// The IDs of the series those works are part of, in numerical order
         /// of work and series ID; empty if none found
         /// </returns>
-        Task<IEnumerable<IdPair<Work,Series>>> IdsForWorkIdsAsync(
+        Task<IEnumerable<ParentChildren<Work,Series>>> IdsForWorkIdsAsync(
             IEnumerable<long> workIds);
 
         /// <summary>

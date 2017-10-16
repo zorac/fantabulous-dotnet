@@ -10,6 +10,7 @@ using Fantabulous.Core.Entities;
 using Fantabulous.Core.Models;
 using Fantabulous.Core.Repositories;
 using Fantabulous.Core.Services;
+using Fantabulous.Core.Types;
 
 namespace Fantabulous.Works.Services
 {
@@ -47,7 +48,7 @@ namespace Fantabulous.Works.Services
                 var work = await db.Works.ForIdAsync(id);
 
                 work.PseudIds = (await db.Pseuds.IdsForWorkIdAsync(id)).ToArray();
-                work.TagIds = (await db.Tags.IdsForWorkIdAsync(id)).ToArray();
+                work.TagIds = (await db.Tags.TypesAndIdsForWorkIdAsync(id)).ToDictionary();
                 work.SeriesIds = (await db.Series.IdsForWorkIdAsync(id)).ToArray();
                 work.ChapterIds = (await db.Chapters.IdsForWorkIdAsync(id)).ToArray();
 
@@ -61,33 +62,19 @@ namespace Fantabulous.Works.Services
             using (var db = await Repository.GetDatabaseAsync())
             {
                 var works = await db.Works.ForIdsAsync(ids);
-                var pseuds = new IdPairReader<Work,Pseud>(
-                    await db.Pseuds.IdsForWorkIdsAsync(ids));
-                var tags = new IdPairReader<Work,Tag>(
-                    await db.Tags.IdsForWorkIdsAsync(ids));
-                var series = new IdPairReader<Work,Series>(
-                    await db.Series.IdsForWorkIdsAsync(ids));
-                var chapters = new IdPairReader<Work,Chapter>(
-                    await db.Chapters.IdsForWorkIdsAsync(ids));
+                var pseuds = (await db.Pseuds.IdsForWorkIdsAsync(ids)).GetReader();
+                var tags = (await db.Tags.TypesAndIdsForWorkIdsAsync(ids)).GetReader();
+                var series = (await db.Series.IdsForWorkIdsAsync(ids)).GetReader();
+                var chapters = (await db.Chapters.IdsForWorkIdsAsync(ids)).GetReader();
 
-                return works
-                    .Select(s => AddArrays(s, pseuds, tags, series, chapters));
+                return works.Select(w => {
+                    w.PseudIds = pseuds.Get(w.Id);
+                    w.TagIds = tags.Get(w.Id);
+                    w.SeriesIds = series.Get(w.Id);
+                    w.ChapterIds = chapters.Get(w.Id);
+                    return w;
+                });
             }
-        }
-
-        private Work AddArrays(
-            Work work,
-            IdPairReader<Work,Pseud> pseuds,
-            IdPairReader<Work,Tag> tags,
-            IdPairReader<Work,Series> series,
-            IdPairReader<Work,Chapter> chapters)
-        {
-            work.PseudIds = pseuds.GetChildIdsForParentId(work.Id);
-            work.TagIds = tags.GetChildIdsForParentId(work.Id);
-            work.SeriesIds = series.GetChildIdsForParentId(work.Id);
-            work.ChapterIds = chapters.GetChildIdsForParentId(work.Id);
-
-            return work;
         }
 
         public async Task<string> GetWorkJsonAsync(long id)

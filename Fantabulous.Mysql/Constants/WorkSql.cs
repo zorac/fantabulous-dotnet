@@ -28,12 +28,11 @@ namespace Fantabulous.Mysql.Constants
         ;";
 
         internal const string SelectIdsBySeriesIds = @"
-            SELECT      series_id   AS ParentId,
-                        work_id     AS ChildId
+            SELECT      series_id                               AS ParentId,
+                        GROUP_CONCAT(work_id ORDER BY position) AS ChildIdString
             FROM        series_works
             WHERE       series_id IN @SeriesIds
-            ORDER BY    series_id,
-                        position
+            GROUP BY    series_id
         ;";
 
         internal const string Insert = @"

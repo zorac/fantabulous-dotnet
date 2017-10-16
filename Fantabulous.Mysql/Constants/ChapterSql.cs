@@ -30,12 +30,11 @@ namespace Fantabulous.Mysql.Constants
         ;";
 
         internal const string SelectIdsByWorkIds = @"
-            SELECT      work_id AS ParentId,
-                        id      AS ChildId
+            SELECT      work_id                             AS ParentId,
+                        GROUP_CONCAT(id ORDER BY position)  AS ChildIdString
             FROM        chapters
             WHERE       work_id IN @WorkIds
-            ORDER BY    work_id,
-                        position
+            GROUP BY    work_id
         ;";
 
         internal const string Insert = @"

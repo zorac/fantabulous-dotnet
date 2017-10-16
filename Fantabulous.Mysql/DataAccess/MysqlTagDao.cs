@@ -45,30 +45,35 @@ namespace Fantabulous.Mysql.DataAccess
                 new { Ids = ids });
         }
 
-        public Task<IEnumerable<long>> IdsForWorkIdAsync(long workId)
+        public Task<IEnumerable<TypeChildren<TagType,Tag>>> TypesAndIdsForWorkIdAsync(
+            long workId)
         {
-            return Mysql.QueryAsync<long>(TagSql.SelectIdsByWorkId,
+            return Mysql.QueryAsync<TypeChildren<TagType,Tag>>(
+                TagSql.SelectTypesAndIdsByWorkId,
                 new { WorkId = workId });
         }
 
-        public Task<IEnumerable<IdPair<Work,Tag>>> IdsForWorkIdsAsync(
+        public Task<IEnumerable<ParentTypeChildren<Work,TagType,Tag>>> TypesAndIdsForWorkIdsAsync(
             IEnumerable<long> workIds)
         {
-            return Mysql.QueryAsync<IdPair<Work,Tag>>(TagSql.SelectIdsByWorkIds,
-                new { WorkIds = workIds });
+            return Mysql.QueryAsync<ParentTypeChildren<Work,TagType,Tag>>(
+                TagSql.SelectTypesAndIdsByWorkIds, new { WorkIds = workIds });
         }
 
-        public Task<IEnumerable<long>> IdsForSeriesIdAsync(long seriesId)
+        public Task<IEnumerable<TypeChildren<TagType,Tag>>> TypesAndIdsForSeriesIdAsync(
+            long seriesId)
         {
-            return Mysql.QueryAsync<long>(TagSql.SelectIdsBySeriesId,
+            return Mysql.QueryAsync<TypeChildren<TagType,Tag>>(
+                TagSql.SelectTypesAndIdsBySeriesId,
                 new { SeriesId = seriesId });
         }
 
-        public Task<IEnumerable<IdPair<Series,Tag>>> IdsForSeriesIdsAsync(
+        public Task<IEnumerable<ParentTypeChildren<Series,TagType,Tag>>> TypesAndIdsForSeriesIdsAsync(
             IEnumerable<long> seriesIds)
         {
-            return Mysql.QueryAsync<IdPair<Series,Tag>>(
-                TagSql.SelectIdsBySeriesIds, new { SeriesIds = seriesIds });
+            return Mysql.QueryAsync<ParentTypeChildren<Series,TagType,Tag>>(
+                TagSql.SelectTypesAndIdsBySeriesIds,
+                new { SeriesIds = seriesIds });
         }
 
         public async Task<Tag> CreateAsync(

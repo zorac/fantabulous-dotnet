@@ -62,10 +62,10 @@ namespace Fantabulous.Mysql.DataAccess
                 new { UserId = userId });
         }
 
-        public Task<IEnumerable<IdPair<User,Pseud>>> IdsForUserIdsAsync(
+        public Task<IEnumerable<ParentChildren<User,Pseud>>> IdsForUserIdsAsync(
             IEnumerable<long> userIds)
         {
-            return Mysql.QueryAsync<IdPair<User,Pseud>>(
+            return Mysql.QueryAsync<ParentChildren<User,Pseud>>(
                 PseudSql.SelectIdsByUserIds, new { UserIds = userIds });
         }
 
@@ -75,10 +75,10 @@ namespace Fantabulous.Mysql.DataAccess
                 new { WorkId = workId });
         }
 
-        public Task<IEnumerable<IdPair<Work,Pseud>>> IdsForWorkIdsAsync(
+        public Task<IEnumerable<ParentChildren<Work,Pseud>>> IdsForWorkIdsAsync(
             IEnumerable<long> workIds)
         {
-            return Mysql.QueryAsync<IdPair<Work,Pseud>>(
+            return Mysql.QueryAsync<ParentChildren<Work,Pseud>>(
                 PseudSql.SelectIdsByWorkIds, new { WorkIds = workIds });
         }
 
@@ -88,10 +88,10 @@ namespace Fantabulous.Mysql.DataAccess
                 new { SeriesId = seriesId });
         }
 
-        public Task<IEnumerable<IdPair<Series,Pseud>>> IdsForSeriesIdsAsync(
+        public Task<IEnumerable<ParentChildren<Series,Pseud>>> IdsForSeriesIdsAsync(
             IEnumerable<long> seriesIds)
         {
-            return Mysql.QueryAsync<IdPair<Series,Pseud>>(
+            return Mysql.QueryAsync<ParentChildren<Series,Pseud>>(
                 PseudSql.SelectIdsBySeriesIds, new { SeriesIds = seriesIds });
         }
 

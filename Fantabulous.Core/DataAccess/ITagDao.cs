@@ -36,53 +36,55 @@ namespace Fantabulous.Core.DataAccess
         Task<IEnumerable<Tag>> ForIdsAsync(IEnumerable<long> ids);
 
         /// <summary>
-        /// Fetch the tag IDs for a work.
+        /// Fetch the tag types and IDs for a work.
         /// </summary>
         /// <param name="workId">
         /// A work ID
         /// </param>
         /// <returns>
-        /// The IDs of the tags attached to the work, ordered by position;
-        /// empty if none found
+        /// The types and IDs of the tags attached to the work, ordered by
+        /// position; empty if none found
         /// </returns>
-        Task<IEnumerable<long>> IdsForWorkIdAsync(long workId);
+        Task<IEnumerable<TypeChildren<TagType,Tag>>> TypesAndIdsForWorkIdAsync(
+            long workId);
 
         /// <summary>
-        /// Fetch the tag IDs for multiple works.
+        /// Fetch the tag types and IDs for multiple works.
         /// </summary>
         /// <param name="workIds">
         /// Some work IDs
         /// </param>
         /// <returns>
-        /// The IDs of the works and tags, ordered by work ID and position;
-        /// empty if none found
+        /// The IDs of the works and types and IDs of their tags, ordered by
+        /// work ID and position; empty if none found
         /// </returns>
-        Task<IEnumerable<IdPair<Work,Tag>>> IdsForWorkIdsAsync(
+        Task<IEnumerable<ParentTypeChildren<Work,TagType,Tag>>> TypesAndIdsForWorkIdsAsync(
             IEnumerable<long> workIds);
 
         /// <summary>
-        /// Fetch the tag IDs for a series.
+        /// Fetch the tag types and IDs for a series.
         /// </summary>
         /// <param name="seriesId">
         /// A series ID
         /// </param>
         /// <returns>
-        /// The IDs of the tags attached to the works in the series, ordered by
-        /// type, frequency and first appearance; empty if none found
+        /// The types and IDs of the tags attached to the works in the series,
+        /// ordered by type, frequency and first appearance; empty if none found
         /// </returns>
-        Task<IEnumerable<long>> IdsForSeriesIdAsync(long seriesId);
+        Task<IEnumerable<TypeChildren<TagType,Tag>>> TypesAndIdsForSeriesIdAsync(
+            long seriesId);
 
         /// <summary>
-        /// Fetch the tag IDs for multiple series.
+        /// Fetch the tag types and IDs for multiple series.
         /// </summary>
         /// <param name="seriesIds">
         /// Some series IDs
         /// </param>
         /// <returns>
-        /// The IDs of the series and tags, ordered by series ID and position;
-        /// empty if none found
+        /// The IDs of the series and types and IDs of thir tags, ordered by
+        /// series ID, type, frequency and first appearance; empty if none found
         /// </returns>
-        Task<IEnumerable<IdPair<Series,Tag>>> IdsForSeriesIdsAsync(
+        Task<IEnumerable<ParentTypeChildren<Series,TagType,Tag>>> TypesAndIdsForSeriesIdsAsync(
             IEnumerable<long> seriesIds);
 
         /// <summary>

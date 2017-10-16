@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Fantabulous.Core.Entities
 {
     /// <summary>
@@ -9,6 +11,6 @@ namespace Fantabulous.Core.Entities
         /// <summary>
         /// The IDs of the works in this series, in order.
         /// </summary>
-        public long[] WorkIds { get; set; }
+        public IEnumerable<long> WorkIds { get; set; }
     }
 }

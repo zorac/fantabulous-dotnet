@@ -81,7 +81,7 @@ namespace Fantabulous.Core.DataAccess
         /// The pseud IDs for those users, ordered by user ID and name; empty
         /// if none found
         /// </returns>
-        Task<IEnumerable<IdPair<User,Pseud>>> IdsForUserIdsAsync(
+        Task<IEnumerable<ParentChildren<User,Pseud>>> IdsForUserIdsAsync(
             IEnumerable<long> userIds);
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Fantabulous.Core.DataAccess
         /// The pseud IDs which are creators of the works, ordered by work ID
         /// and position; empty if none found
         /// </returns>
-        Task<IEnumerable<IdPair<Work,Pseud>>> IdsForWorkIdsAsync(
+        Task<IEnumerable<ParentChildren<Work,Pseud>>> IdsForWorkIdsAsync(
             IEnumerable<long> workIds);
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Fantabulous.Core.DataAccess
         /// The pseud IDs which are creators of the series, ordered by
         /// series ID, frequency and first appearance; empty if none found
         /// </returns>
-        Task<IEnumerable<IdPair<Series,Pseud>>> IdsForSeriesIdsAsync(
+        Task<IEnumerable<ParentChildren<Series,Pseud>>> IdsForSeriesIdsAsync(
             IEnumerable<long> seriesIds);
 
         /// <summary>

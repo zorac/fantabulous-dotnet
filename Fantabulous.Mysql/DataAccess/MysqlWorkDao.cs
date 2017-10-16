@@ -51,10 +51,10 @@ namespace Fantabulous.Mysql.DataAccess
                 new { SeriesId = seriesId });
         }
 
-        public Task<IEnumerable<IdPair<Series,Work>>> IdsForSeriesIdsAsync(
+        public Task<IEnumerable<ParentChildren<Series,Work>>> IdsForSeriesIdsAsync(
             IEnumerable<long> seriesIds)
         {
-            return Mysql.QueryAsync<IdPair<Series,Work>>(
+            return Mysql.QueryAsync<ParentChildren<Series,Work>>(
                 WorkSql.SelectIdsBySeriesIds, new { SeriesIds = seriesIds });
         }
 
