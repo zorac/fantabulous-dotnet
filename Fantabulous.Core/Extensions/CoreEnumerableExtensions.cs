@@ -1,12 +1,13 @@
 using Fantabulous.Core.Entities;
 using Fantabulous.Core.Models;
+using Fantabulous.Core.Types;
 
 namespace System.Collections.Generic
 {
     public static class CoreEnumerableExtensions
     {
         /// <summary>
-        /// Convert a sequence of TypeChildren into a Dictionary of child IDs
+        /// Convert a sequence of TypeChildren into a dictionary of child IDs
         /// by type.
         /// </summary>
         /// <param name="data">
@@ -15,11 +16,10 @@ namespace System.Collections.Generic
         /// <returns>
         /// A dictionary mapping types to sequences of child IDs, possibly empty
         /// </returns>
-        public static IDictionary<TType,IEnumerable<long>> ToDictionary<TType,TChild>(
-            this IEnumerable<TypeChildren<TType,TChild>> data)
-            where TChild : HasId
+        public static TagsByType ToTagsByType(
+            this IEnumerable<TypeChildren<TagType,Tag>> data)
         {
-            var result = new Dictionary<TType,IEnumerable<long>>();
+            var result = new TagsByType();
 
             foreach (var datum in data)
             {

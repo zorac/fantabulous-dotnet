@@ -1,7 +1,10 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 using Fantabulous.Core.Entities;
+using Fantabulous.Core.Types;
 
 namespace Fantabulous.Core.Models
 {
@@ -40,17 +43,65 @@ namespace Fantabulous.Core.Models
         /// <returns>
         /// A dictionary mapping types to sequences of child IDs, possibly empty
         /// </returns>
-        public IDictionary<TType,IEnumerable<long>> Get(long parentId)
+        public IEnumerable<TypeChildren<TType,TChild>> Get(long parentId)
         {
-            var result = new Dictionary<TType,IEnumerable<long>>();
+            return new PtcEnumerable(this, parentId);
+        }
 
-            while (More && (Data.Current.ParentId == parentId))
+        private class PtcEnumerable
+            : IEnumerable<TypeChildren<TType,TChild>>
+            , IEnumerator<TypeChildren<TType,TChild>>
+        {
+            private ParentTypeChildrenReader<TParent,TType,TChild> Reader;
+            private long ParentId;
+            private bool Moved;
+
+            object IEnumerator.Current => Current;
+            public TypeChildren<TType,TChild> Current { get; set; }
+
+            internal PtcEnumerable(
+                ParentTypeChildrenReader<TParent,TType,TChild> reader,
+                long parentId)
             {
-                result.Add(Data.Current.Type, Data.Current.ChildIds);
-                More = Data.MoveNext();
+                Reader = reader;
+                ParentId = parentId;
             }
 
-            return result;
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+
+            public IEnumerator<TypeChildren<TType,TChild>> GetEnumerator()
+            {
+                return this;
+            }
+
+            public bool MoveNext()
+            {
+                if (!Reader.More
+                        || (Reader.Data.Current.ParentId != ParentId)) {
+                    return false;
+                } else if (!Moved || ((Reader.More = Reader.Data.MoveNext())
+                        && (Reader.Data.Current.ParentId == ParentId))) {
+                    Moved = true;
+                    Current = Reader.Data.Current;
+                    return true;
+                } else {
+                    Current = null;
+                    return false;
+                }
+            }
+
+            public void Reset()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Dispose()
+            {
+                // Nothing to dispose of
+            }
         }
     }
 }

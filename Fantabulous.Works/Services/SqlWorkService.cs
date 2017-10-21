@@ -48,7 +48,7 @@ namespace Fantabulous.Works.Services
                 var work = await db.Works.ForIdAsync(id);
 
                 work.PseudIds = (await db.Pseuds.IdsForWorkIdAsync(id)).ToArray();
-                work.TagIds = (await db.Tags.TypesAndIdsForWorkIdAsync(id)).ToDictionary();
+                work.TagIds = (await db.Tags.TypesAndIdsForWorkIdAsync(id)).ToTagsByType();
                 work.SeriesIds = (await db.Series.IdsForWorkIdAsync(id)).ToArray();
                 work.ChapterIds = (await db.Chapters.IdsForWorkIdAsync(id)).ToArray();
 
@@ -69,7 +69,7 @@ namespace Fantabulous.Works.Services
 
                 return works.Select(w => {
                     w.PseudIds = pseuds.Get(w.Id);
-                    w.TagIds = tags.Get(w.Id);
+                    w.TagIds = tags.Get(w.Id).ToTagsByType();
                     w.SeriesIds = series.Get(w.Id);
                     w.ChapterIds = chapters.Get(w.Id);
                     return w;

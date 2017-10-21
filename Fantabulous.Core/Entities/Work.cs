@@ -19,7 +19,7 @@ namespace Fantabulous.Core.Entities
         /// <summary>
         /// The IDs of the tags attached to this work, in display order
         /// </summary>
-        public IDictionary<TagType,IEnumerable<long>> TagIds { get; set; }
+        public TagsByType TagIds { get; set; }
 
         /// <summary>
         /// The IDs of the series this work belongs to.

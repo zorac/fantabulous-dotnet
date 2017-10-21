@@ -6,13 +6,13 @@ namespace Fantabulous.Core.Models
     /// A parent entity ID, type, and sequence of child entity IDs.
     /// </summary>
     public class ParentTypeChildren<TParent,TType,TChild>
-        : ParentChildren<TParent,TChild>
+        : TypeChildren<TType,TChild>
         where TParent: HasId
         where TChild: HasId
     {
         /// <summary>
-        /// The type.
+        /// The parent entity ID.
         /// </summary>
-        public TType Type { get; set; }
+        public long ParentId { get; set; }
     }
 }
