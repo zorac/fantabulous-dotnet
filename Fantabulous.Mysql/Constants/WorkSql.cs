@@ -35,6 +35,24 @@ namespace Fantabulous.Mysql.Constants
             GROUP BY    series_id
         ;";
 
+        internal const string SelectIdsByPseudId = @"
+            SELECT      work_id
+            FROM        work_pseuds
+            INNER JOIN  works
+              ON        work_id = id
+            WHERE       pseud_id = @PseudId
+            ORDER BY    majorly_updated DESC
+        ;";
+
+        internal const string SelectIdsByTagId = @"
+            SELECT      work_id
+            FROM        work_tags
+            INNER JOIN  works
+              ON        work_id = id
+            WHERE       tag_id = @TagId
+            ORDER BY    majorly_updated DESC
+        ;";
+
         internal const string Insert = @"
             INSERT INTO works
             SET         name = @Name

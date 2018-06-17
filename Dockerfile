@@ -1,5 +1,5 @@
 # Create a temporary image for running our build
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM microsoft/dotnet:2.1-sdk-alpine AS build
 WORKDIR /app
 
 # Copy the project files only, and restore dependencies
@@ -18,7 +18,7 @@ RUN echo exec dotnet Fantabulous.${app}.dll > out/entrypoint.sh
 
 
 # Create our actual output image
-FROM microsoft/aspnetcore:2.0
+FROM microsoft/doptnet:2.1-aspnetcore-runtime-alpine
 WORKDIR /app
 
 # Copy the app across from the build image
